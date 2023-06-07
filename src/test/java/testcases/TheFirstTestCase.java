@@ -9,12 +9,18 @@ public class TheFirstTestCase {
     WebDriver driver;
 
     @Test
-    public void openBrowser() {
+    public void openChromeBrowser() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.get("https://www.nytimes.com");
     }
+
+    @Test
+    public void quitDriver() {
+        driver.quit();
+    }
+
 
 }
