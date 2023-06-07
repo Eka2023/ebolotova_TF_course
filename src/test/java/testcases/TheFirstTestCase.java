@@ -3,6 +3,7 @@ package testcases;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 public class TheFirstTestCase {
@@ -17,7 +18,7 @@ public class TheFirstTestCase {
         driver.get("https://www.nytimes.com");
     }
 
-    @Test
+    @AfterClass
     public void quitDriver() {
         driver.quit();
     }
