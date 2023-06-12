@@ -1,4 +1,4 @@
-package math_operations;
+package wee3_5c;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
