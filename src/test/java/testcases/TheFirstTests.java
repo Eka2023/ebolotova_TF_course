@@ -6,14 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class TheFirstTests {
     WebDriver driver;
-
+    String baseURL = "https://test.my-fork.com/";
+    String correctEmail = "bolotova.katya@gmail.com";
+    String correctPassword = "password";
+    String incorrectEmail = "bolotova";
+    String emptyPassword = "";
+    By signUpButton = By.xpath("//div[@id='sign-up-button']");
+    //By signInButton = By.xpath("//div[@id='log-in-button']");
     By signInButton = By.xpath("//div[text()='Sign In']");
     By emailInputField = By.xpath("//input[@id='email']");
     By passwordInputField = By.xpath("//input[@id='password']");
@@ -24,21 +27,29 @@ public class TheFirstTests {
 
     By errorAboutWrongCredentials = By.xpath("//p[text()='Error: credentials you provided are incorrect. Please try again. ']");
 
-    @BeforeClass
-    public void openBrowser() throws InterruptedException {
+    @BeforeTest
+    public void openDriver() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-        driver.get("https://test.my-fork.com/");
-        //Open Sign In page
-        driver.findElement(signInButton).click();
-        Thread.sleep(2000);
     }
 
     @Test
-    public void validateEmailPasswordFieldAndLoginButtonAreDisplayed() {
+    public void validateSignInAndSignUpButtonsPresented() {
+        driver.get(baseURL);
+        boolean singInBtnIsPresented = driver.findElement(signInButton).isDisplayed();
+        boolean singUpBtnIsPresented = driver.findElement(signUpButton).isDisplayed();
+        Assert.assertTrue(singInBtnIsPresented);
+        Assert.assertTrue(singUpBtnIsPresented);
 
+    }
+
+    @Test
+    public void validateEmailPasswordFieldAndLoginButtonAreDisplayed() throws InterruptedException{
+        driver.get(baseURL);
+        Thread.sleep(1000);
+        driver.findElement(signInButton).click();
         boolean emailFieldIsDisplayed = driver.findElement(emailInputField).isDisplayed();
         boolean passwordFieldIsDisplayed = driver.findElement(passwordInputField).isDisplayed();
         boolean loginButtonIsDisplayed = driver.findElement(loginButton).isDisplayed();
@@ -49,19 +60,22 @@ public class TheFirstTests {
     }
 
     @Test
-    public void checkboxRememberMeIsSelected() {
-
+    public void checkboxRememberMeIsSelected() throws InterruptedException{
+        driver.get(baseURL);
+        Thread.sleep(1000);
+        driver.findElement(signInButton).click();
         boolean rememberMeCheckBoxIsSelected = driver.findElement(checkBoxRememberMe).isSelected();
 
         Assert.assertTrue(rememberMeCheckBoxIsSelected);
-
     }
 
     @Test
     public void enteringWrongEmailTest() throws InterruptedException {
-
-        driver.findElement(emailInputField).sendKeys("bolotova");
-        driver.findElement(passwordInputField).sendKeys("password");
+        driver.get(baseURL);
+        Thread.sleep(1000);
+        driver.findElement(signInButton).click();
+        driver.findElement(emailInputField).sendKeys(incorrectEmail);
+        driver.findElement(passwordInputField).sendKeys(correctPassword);
         driver.findElement(loginButton).click();
         Thread.sleep(1000);
         WebElement errorMessage = driver.findElement(errorAboutIncorrectEmail);
@@ -75,9 +89,11 @@ public class TheFirstTests {
 
     @Test
     public void enteringEmptyFieldTest() throws InterruptedException {
-
-        driver.findElement(emailInputField).sendKeys("bolotova.katya@gmail.com");
-        driver.findElement(passwordInputField).sendKeys("");
+        driver.get(baseURL);
+        Thread.sleep(1000);
+        driver.findElement(signInButton).click();
+        driver.findElement(emailInputField).sendKeys(correctEmail);
+        driver.findElement(passwordInputField).sendKeys(emptyPassword);
         driver.findElement(loginButton).click();
         Thread.sleep(1000);
 
@@ -88,15 +104,16 @@ public class TheFirstTests {
 
         Assert.assertTrue(actualErrorMessageIsEnabled);
         Assert.assertEquals(actualErrorMessage, "Error: fields are empty");
-
     }
 
     @Test
     @Ignore
     public void wrongCredentialsTest() throws InterruptedException {
-
-        driver.findElement(emailInputField).sendKeys("bolotova.katya@gmail.com");
-        driver.findElement(passwordInputField).sendKeys("password");
+        driver.get(baseURL);
+        Thread.sleep(1000);
+        driver.findElement(signInButton).click();
+        driver.findElement(emailInputField).sendKeys(correctEmail);
+        driver.findElement(passwordInputField).sendKeys(correctPassword);
         driver.findElement(loginButton).click();
         Thread.sleep(1000);
 
@@ -107,13 +124,11 @@ public class TheFirstTests {
 
         Assert.assertTrue(actualErrorMessageIsEnabled);
         Assert.assertEquals(actualErrorMessage, "Error: credentials you provided are incorrect. Please try again. ");
-
     }
 
-    @AfterClass
+    @AfterTest
     public void quitDriver() {
         driver.quit();
     }
-
 
 }
