@@ -1,15 +1,18 @@
 package testcases;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import java.time.Duration;
 
 public class TheFirstTests {
     WebDriver driver;
@@ -24,7 +27,7 @@ public class TheFirstTests {
 
     By errorAboutWrongCredentials = By.xpath("//p[text()='Error: credentials you provided are incorrect. Please try again. ']");
 
-    @BeforeClass
+    @BeforeMethod
     public void openBrowser() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
@@ -58,15 +61,15 @@ public class TheFirstTests {
     }
 
     @Test
-    public void enteringWrongEmailTest() throws InterruptedException {
+    public void enteringWrongEmailTest() {
 
         driver.findElement(emailInputField).sendKeys("bolotova");
         driver.findElement(passwordInputField).sendKeys("password");
         driver.findElement(loginButton).click();
-        Thread.sleep(1000);
+        waitForVisibilityOf(errorAboutIncorrectEmail, 5);
         WebElement errorMessage = driver.findElement(errorAboutIncorrectEmail);
-        boolean actualErrorMessageIsEnabled = errorMessage.isEnabled();
-        Thread.sleep(3000);
+        boolean actualErrorMessageIsEnabled = errorMessage.isDisplayed();
+
         String actualErrorMessage = errorMessage.getText();
         Assert.assertTrue(actualErrorMessageIsEnabled);
         Assert.assertEquals(actualErrorMessage, "Error: email is incorrect");
@@ -74,16 +77,14 @@ public class TheFirstTests {
     }
 
     @Test
-    public void enteringEmptyFieldTest() throws InterruptedException {
+    public void enteringEmptyFieldTest() {
 
         driver.findElement(emailInputField).sendKeys("bolotova.katya@gmail.com");
         driver.findElement(passwordInputField).sendKeys("");
         driver.findElement(loginButton).click();
-        Thread.sleep(1000);
-
+        waitForVisibilityOf(errorAboutEmptyField, 5);
         WebElement errorMessage = driver.findElement(errorAboutEmptyField);
-        boolean actualErrorMessageIsEnabled = errorMessage.isEnabled();
-        Thread.sleep(3000);
+        boolean actualErrorMessageIsEnabled = errorMessage.isDisplayed();
         String actualErrorMessage = errorMessage.getText();
 
         Assert.assertTrue(actualErrorMessageIsEnabled);
@@ -98,11 +99,11 @@ public class TheFirstTests {
         driver.findElement(emailInputField).sendKeys("bolotova.katya@gmail.com");
         driver.findElement(passwordInputField).sendKeys("password");
         driver.findElement(loginButton).click();
-        Thread.sleep(1000);
-
+        //Thread.sleep(1000);
+waitForVisibilityOf(errorAboutWrongCredentials, 5);
         WebElement errorMessage = driver.findElement(errorAboutWrongCredentials);
         boolean actualErrorMessageIsEnabled = errorMessage.isEnabled();
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
         String actualErrorMessage = errorMessage.getText();
 
         Assert.assertTrue(actualErrorMessageIsEnabled);
@@ -110,10 +111,25 @@ public class TheFirstTests {
 
     }
 
-    @AfterClass
+    @AfterMethod
     public void quitDriver() {
         driver.quit();
     }
 
+    private void wait(ExpectedCondition<WebElement> condition, Integer timeOut) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
+        wait.until(condition);
+    }
+    protected void waitForVisibilityOf(By locator, Integer timeOutInSeconds) {
+        int attempts = 0;
+        while (attempts < 2) {
+            try {
+                wait(ExpectedConditions.visibilityOfElementLocated(locator),
+                        timeOutInSeconds);
+            } catch (StaleElementReferenceException ignored) {
+            }
+            attempts++;
+        }
+    }
 
 }
