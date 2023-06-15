@@ -13,7 +13,7 @@ public class LoginTests extends BaseTest{
         signInPage.fillTheSignFormWithIncorrectEmail();
         waitForVisibilityOf(signInPage.getErrorAboutIncorrectEmail(), 5);
         WebElement errorMessage = driver.findElement(signInPage.getErrorAboutIncorrectEmail());
-        boolean actualErrorMessageIsEnabled = errorMessage.isEnabled();
+        boolean actualErrorMessageIsEnabled = errorMessage.isDisplayed();
         String actualErrorMessage = errorMessage.getText();
 
         Assert.assertTrue(actualErrorMessageIsEnabled);
@@ -27,7 +27,7 @@ public class LoginTests extends BaseTest{
         signInPage.fillTheSignFormWithEmptyPassword();
         waitForVisibilityOf(signInPage.getErrorAboutEmptyField(), 5);
         WebElement errorMessage = driver.findElement(signInPage.getErrorAboutEmptyField());
-        boolean actualErrorMessageIsEnabled = errorMessage.isEnabled();
+        boolean actualErrorMessageIsEnabled = errorMessage.isDisplayed();
         String actualErrorMessage = errorMessage.getText();
 
         Assert.assertTrue(actualErrorMessageIsEnabled);
