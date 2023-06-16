@@ -6,7 +6,6 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest{
-
     @Test
     public void enteringWrongEmailTest() {
         homePage.clickSignInBtn();
@@ -33,7 +32,6 @@ public class LoginTests extends BaseTest{
         Assert.assertTrue(actualErrorMessageIsEnabled);
         Assert.assertEquals(actualErrorMessage, "Error: fields are empty");
     }
-
     @Test
     @Ignore
     public void wrongCredentialsTest() throws InterruptedException {
@@ -49,6 +47,4 @@ public class LoginTests extends BaseTest{
         Assert.assertTrue(actualErrorMessageIsEnabled);
         Assert.assertEquals(actualErrorMessage, "Error: credentials you provided are incorrect. Please try again. ");
     }
-
-
 }
