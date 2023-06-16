@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="FullTestSuite" verbose="1">
+<suite name="Factory Whole TestSuite" verbose="1">
 
     <test name="Whole Test Suite">
         <packages>
