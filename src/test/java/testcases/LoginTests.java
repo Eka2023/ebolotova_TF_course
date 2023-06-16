@@ -12,7 +12,7 @@ public class LoginTests extends BaseTest{
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithIncorrectEmail();
         waitForVisibilityOf(signInPage.getErrorAboutIncorrectEmail(), 5);
-        WebElement errorMessage = driver.findElement(signInPage.getErrorAboutIncorrectEmail());
+        WebElement errorMessage = signInPage.getErrorAboutIncorrectEmail();
         boolean actualErrorMessageIsEnabled = errorMessage.isDisplayed();
         String actualErrorMessage = errorMessage.getText();
 
@@ -26,7 +26,7 @@ public class LoginTests extends BaseTest{
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithEmptyPassword();
         waitForVisibilityOf(signInPage.getErrorAboutEmptyField(), 5);
-        WebElement errorMessage = driver.findElement(signInPage.getErrorAboutEmptyField());
+        WebElement errorMessage = signInPage.getErrorAboutEmptyField();
         boolean actualErrorMessageIsEnabled = errorMessage.isDisplayed();
         String actualErrorMessage = errorMessage.getText();
 
@@ -41,7 +41,7 @@ public class LoginTests extends BaseTest{
         signInPage.fillTheSignFormWithCorrectData();
         Thread.sleep(1000);
 
-        WebElement errorMessage = driver.findElement(signInPage.getErrorAboutWrongCredentials());
+        WebElement errorMessage = signInPage.getErrorAboutWrongCredentials();
         boolean actualErrorMessageIsEnabled = errorMessage.isEnabled();
         Thread.sleep(3000);
         String actualErrorMessage = errorMessage.getText();

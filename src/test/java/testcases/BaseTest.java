@@ -54,11 +54,11 @@ public class BaseTest {
         wait.until(condition);
     }
 
-    protected void waitForVisibilityOf(By locator, Integer timeOutInSeconds) {
+    protected void waitForVisibilityOf(WebElement element, Integer timeOutInSeconds) {
         int attempts = 0;
         while (attempts < 2) {
             try {
-                wait(ExpectedConditions.visibilityOfElementLocated(locator),
+                wait(ExpectedConditions.visibilityOf(element),
                         timeOutInSeconds);
             } catch (StaleElementReferenceException ignored) {
             }

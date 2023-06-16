@@ -1,6 +1,7 @@
 package pageobjects;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class BaseMain {
 
@@ -8,12 +9,17 @@ public class BaseMain {
     String baseURL = "https://test.my-fork.com/";
 
 
-    public BaseMain(WebDriver dr) {
-        this.driver = dr;
-    }
+//    public BaseMain(WebDriver dr) {
+//        this.driver = dr;
+//    }
 
     public void getURL() {
         driver.get(baseURL);
+    }
+
+    public BaseMain(WebDriver dr) {
+        this.driver = dr;
+        PageFactory.initElements(driver, this);
     }
 
 }
