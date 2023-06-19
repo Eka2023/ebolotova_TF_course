@@ -10,10 +10,7 @@ public class HomePage extends BaseMain {
     public HomePage(WebDriver dr) {
         super(dr);
     }
-
-    String baseURL = "https://test.my-fork.com/";
     By signUpButton = By.xpath("//div[@id='sign-up-button']");
-    //By signInButton = By.xpath("//div[@id='log-in-button']");
     By signInButton = By.xpath("//div[text()='Sign In']");
 
     public void clickSignInBtn() {
@@ -27,7 +24,7 @@ public class HomePage extends BaseMain {
         return signUpButton;
     }
 
-    public boolean homePageElementDisplayed(By element){
-        return driver.findElement(element).isDisplayed();
+    public WebElement homePageElement(By element){
+        return driver.findElement(element);
     }
 }

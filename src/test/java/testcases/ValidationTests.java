@@ -8,8 +8,8 @@ public class ValidationTests extends BaseTest{
 
     @Test
     public void validateSignInAndSignUpButtonsPresented() {
-        boolean singInBtnIsPresented = homePage.homePageElementDisplayed(homePage.getSignInButton());
-        boolean singUpBtnIsPresented = homePage.homePageElementDisplayed(homePage.getSignUpBtn());
+        boolean singInBtnIsPresented = homePage.homePageElement(homePage.getSignInButton()).isDisplayed();
+        boolean singUpBtnIsPresented = homePage.homePageElement(homePage.getSignUpBtn()).isDisplayed();
 
         Assert.assertTrue(singInBtnIsPresented);
         Assert.assertTrue(singUpBtnIsPresented);
@@ -19,9 +19,9 @@ public class ValidationTests extends BaseTest{
     public void validateEmailPasswordFieldAndLoginButtonAreDisplayed() {
         homePage.clickSignInBtn();
         SignInPage signInPage = new SignInPage(driver);
-        boolean emailFieldIsDisplayed = signInPage.signInPageElementDisplayed(signInPage.getEmailInputField());
-        boolean passwordFieldIsDisplayed = signInPage.signInPageElementDisplayed(signInPage.getPasswordInputField());
-        boolean loginButtonIsDisplayed = signInPage.signInPageElementDisplayed(signInPage.getLoginButton());
+        boolean emailFieldIsDisplayed = signInPage.signInPageElement(signInPage.getEmailInputField()).isDisplayed();
+        boolean passwordFieldIsDisplayed = signInPage.signInPageElement(signInPage.getPasswordInputField()).isDisplayed();
+        boolean loginButtonIsDisplayed = signInPage.signInPageElement(signInPage.getLoginButton()).isDisplayed();
 
         Assert.assertTrue(emailFieldIsDisplayed);
         Assert.assertTrue(passwordFieldIsDisplayed);
@@ -31,7 +31,7 @@ public class ValidationTests extends BaseTest{
     @Test
     public void validationThatCheckboxRememberMeIsSelected() {
         homePage.clickSignInBtn();
-        boolean rememberMeCheckBoxIsSelected = signInPage.signInPageElementSelected(signInPage.getCheckBoxRememberMe());
+        boolean rememberMeCheckBoxIsSelected = signInPage.signInPageElement(signInPage.getCheckBoxRememberMe()).isSelected();
 
         Assert.assertTrue(rememberMeCheckBoxIsSelected);
     }

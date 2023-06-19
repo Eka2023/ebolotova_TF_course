@@ -49,13 +49,4 @@ public class SignInPage extends BaseMain {
         return driver.findElement(element);
     }
 
-
-    public boolean signInPageElementSelected(By element){
-        return driver.findElement(element).isSelected();
-    }
-
-    public boolean signInPageElementDisplayed(By element){
-        return driver.findElement(element).isDisplayed();
-    }
-
 }
