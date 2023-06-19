@@ -1,8 +1,11 @@
 package pageobjects;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+@Getter
 public class HomePage extends BaseMain {
     public HomePage(WebDriver dr) {
         super(dr);
@@ -16,7 +19,6 @@ public class HomePage extends BaseMain {
     public void clickSignInBtn() {
         driver.findElement(signInButton).click();
     }
-
     public By getSignInBtn() {
         return signInButton;
     }
@@ -25,4 +27,7 @@ public class HomePage extends BaseMain {
         return signUpButton;
     }
 
+    public boolean homePageElementDisplayed(By element){
+        return driver.findElement(element).isDisplayed();
+    }
 }

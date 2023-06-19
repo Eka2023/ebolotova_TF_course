@@ -8,8 +8,8 @@ public class ValidationTests extends BaseTest{
 
     @Test
     public void validateSignInAndSignUpButtonsPresented() {
-        boolean singInBtnIsPresented = driver.findElement(homePage.getSignInBtn()).isDisplayed();
-        boolean singUpBtnIsPresented = driver.findElement(homePage.getSignUpBtn()).isDisplayed();
+        boolean singInBtnIsPresented = homePage.homePageElementDisplayed(homePage.getSignInButton());
+        boolean singUpBtnIsPresented = homePage.homePageElementDisplayed(homePage.getSignUpBtn());
 
         Assert.assertTrue(singInBtnIsPresented);
         Assert.assertTrue(singUpBtnIsPresented);
@@ -19,9 +19,9 @@ public class ValidationTests extends BaseTest{
     public void validateEmailPasswordFieldAndLoginButtonAreDisplayed() {
         homePage.clickSignInBtn();
         SignInPage signInPage = new SignInPage(driver);
-        boolean emailFieldIsDisplayed = driver.findElement(signInPage.getEmailInputField()).isDisplayed();
-        boolean passwordFieldIsDisplayed = driver.findElement(signInPage.getPasswordInputField()).isDisplayed();
-        boolean loginButtonIsDisplayed = driver.findElement(signInPage.getLoginButton()).isDisplayed();
+        boolean emailFieldIsDisplayed = signInPage.signInPageElementDisplayed(signInPage.getEmailInputField());
+        boolean passwordFieldIsDisplayed = signInPage.signInPageElementDisplayed(signInPage.getPasswordInputField());
+        boolean loginButtonIsDisplayed = signInPage.signInPageElementDisplayed(signInPage.getLoginButton());
 
         Assert.assertTrue(emailFieldIsDisplayed);
         Assert.assertTrue(passwordFieldIsDisplayed);
@@ -31,7 +31,7 @@ public class ValidationTests extends BaseTest{
     @Test
     public void validationThatCheckboxRememberMeIsSelected() {
         homePage.clickSignInBtn();
-        boolean rememberMeCheckBoxIsSelected = driver.findElement(signInPage.getCheckBoxRememberMe()).isSelected();
+        boolean rememberMeCheckBoxIsSelected = signInPage.signInPageElementSelected(signInPage.getCheckBoxRememberMe());
 
         Assert.assertTrue(rememberMeCheckBoxIsSelected);
     }

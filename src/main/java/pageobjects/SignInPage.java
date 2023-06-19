@@ -3,6 +3,7 @@ package pageobjects;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class SignInPage extends BaseMain {
@@ -31,6 +32,7 @@ public class SignInPage extends BaseMain {
         driver.findElement(loginButton).click();
     }
 
+
     public void fillTheSignFormWithCorrectData() {
         driver.findElement(emailInputField).sendKeys(correctEmail);
         driver.findElement(passwordInputField).sendKeys(correctPassword);
@@ -42,4 +44,18 @@ public class SignInPage extends BaseMain {
         driver.findElement(passwordInputField).sendKeys(emptyPassword);
         driver.findElement(loginButton).click();
     }
+
+    public WebElement signInPageElement(By element){
+        return driver.findElement(element);
+    }
+
+
+    public boolean signInPageElementSelected(By element){
+        return driver.findElement(element).isSelected();
+    }
+
+    public boolean signInPageElementDisplayed(By element){
+        return driver.findElement(element).isDisplayed();
+    }
+
 }
