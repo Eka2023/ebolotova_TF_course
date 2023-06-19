@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import pageobjects.SignInPage;
 
 public class ValidationTests extends BaseTest{
-
     @Test
     public void validateSignInAndSignUpButtonsPresented() {
         boolean singInBtnIsPresented = homePage.homePageElement(homePage.getSignInButton()).isDisplayed();
@@ -18,7 +17,6 @@ public class ValidationTests extends BaseTest{
     @Test
     public void validateEmailPasswordFieldAndLoginButtonAreDisplayed() {
         homePage.clickSignInBtn();
-        SignInPage signInPage = new SignInPage(driver);
         boolean emailFieldIsDisplayed = signInPage.signInPageElement(signInPage.getEmailInputField()).isDisplayed();
         boolean passwordFieldIsDisplayed = signInPage.signInPageElement(signInPage.getPasswordInputField()).isDisplayed();
         boolean loginButtonIsDisplayed = signInPage.signInPageElement(signInPage.getLoginButton()).isDisplayed();
