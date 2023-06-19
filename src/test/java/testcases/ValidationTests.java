@@ -9,7 +9,7 @@ public class ValidationTests extends BaseTest{
     @Test
     public void validateSignInAndSignUpButtonsPresented() {
         boolean singInBtnIsPresented = homePage.homePageElement(homePage.getSignInButton()).isDisplayed();
-        boolean singUpBtnIsPresented = homePage.homePageElement(homePage.getSignUpBtn()).isDisplayed();
+        boolean singUpBtnIsPresented = homePage.homePageElement(homePage.getSignUpButton()).isDisplayed();
 
         Assert.assertTrue(singInBtnIsPresented);
         Assert.assertTrue(singUpBtnIsPresented);

@@ -16,13 +16,6 @@ public class HomePage extends BaseMain {
     public void clickSignInBtn() {
         driver.findElement(signInButton).click();
     }
-    public By getSignInBtn() {
-        return signInButton;
-    }
-
-    public By getSignUpBtn() {
-        return signUpButton;
-    }
 
     public WebElement homePageElement(By element){
         return driver.findElement(element);
