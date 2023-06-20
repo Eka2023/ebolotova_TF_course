@@ -4,10 +4,13 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @Getter
 public class SignInPage extends BaseMain {
+
     public SignInPage(WebDriver dr) {
         super(dr);
     }
@@ -56,4 +59,40 @@ public class SignInPage extends BaseMain {
         passwordInputField.sendKeys(emptyPassword);
         loginButton.click();
     }
+
+    public WebElement signInPageElement(By element) {
+        return driver.findElement(element);
+    }
+
+    public boolean elementIsDisplayedOnSignInPage(By element) {
+        WebElement webElement = signInPageElement(element);
+        boolean actualElement = webElement.isDisplayed();
+        return actualElement;
+    }
+
+    public boolean elementIsSelectedOnSignInPage(By element) {
+        WebElement webElement = signInPageElement(element);
+        boolean actualElement = webElement.isSelected();
+        return actualElement;
+    }
+
+
+    public String elementGetText(By element) {
+        WebElement message = signInPageElement(element);
+        String actualText = message.getText();
+        return actualText;
+    }
+
+    public void assertIfElementIsDisplayedOnSignInPage(By element) {
+        Assert.assertTrue(signInPageElement(element).isDisplayed());
+    }
+
+    public void assertIfElementsAreEqualOnSignInPage(String actual, String expected) {
+        Assert.assertEquals(actual, expected);
+    }
+
+    public void assertIfElementIsSelectedOnSignInPage(By element) {
+        Assert.assertTrue(signInPageElement(element).isSelected());
+    }
+
 }

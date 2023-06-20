@@ -1,39 +1,36 @@
 package pageobjects;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
+@Getter
 public class HomePage extends BaseMain {
     public HomePage(WebDriver dr) {
         super(dr);
     }
 
-//    public HomePage(WebDriver dr) {
-//        this.driver = dr;
-//        PageFactory.initElements(driver, this);
-//    }
-
-    String baseURL = "https://test.my-fork.com/";
-
-    @FindBy(id="sign-up-button")
-    WebElement signUpButton;
-
-    @FindBy(xpath="//div[text()='Sign In']")
-    WebElement signInButton;
+    By signUpButton = By.xpath("//div[@id='sign-up-button']");
+    By signInButton = By.xpath("//div[text()='Sign In']");
 
     public void clickSignInBtn() {
-        signInButton.click();
+        driver.findElement(signInButton).click();
     }
 
-    public WebElement getSignInBtn() {
-        return signInButton;
+    public WebElement homePageElement(By element) {
+        return driver.findElement(element);
     }
 
-    public WebElement getSignUpBtn() {
-        return signUpButton;
+    public boolean elementIsDisplayedOnHomePage(By element) {
+        WebElement webElement = homePageElement(element);
+        boolean actualElement = webElement.isDisplayed();
+        return actualElement;
+    }
+
+    public void assertIfElementIsDisplayedOnHomePage(By element) {
+        Assert.assertTrue(homePageElement(element).isDisplayed());
     }
 
 }

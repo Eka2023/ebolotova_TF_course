@@ -1,24 +1,19 @@
 package testcases;
 
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-public class LoginTests extends BaseTest{
-
+public class LoginTests extends BaseTest {
     @Test
     public void enteringWrongEmailTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithIncorrectEmail();
         waitForVisibilityOf(signInPage.getErrorAboutIncorrectEmail(), 5);
-        WebElement errorMessage = signInPage.getErrorAboutIncorrectEmail();
-        boolean actualErrorMessageIsEnabled = errorMessage.isDisplayed();
-        String actualErrorMessage = errorMessage.getText();
-
-        Assert.assertTrue(actualErrorMessageIsEnabled);
-        Assert.assertEquals(actualErrorMessage, "Error: email is incorrect");
-
+        signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutIncorrectEmail());
+        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutIncorrectEmail());
+        signInPage.assertIfElementsAreEqualOnSignInPage(
+                signInPage.elementGetText(signInPage.getErrorAboutIncorrectEmail()),
+                "Error: email is incorrect");
     }
 
     @Test
@@ -26,28 +21,38 @@ public class LoginTests extends BaseTest{
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithEmptyPassword();
         waitForVisibilityOf(signInPage.getErrorAboutEmptyField(), 5);
-        WebElement errorMessage = signInPage.getErrorAboutEmptyField();
-        boolean actualErrorMessageIsEnabled = errorMessage.isDisplayed();
-        String actualErrorMessage = errorMessage.getText();
+        signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutEmptyField());
+        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutEmptyField());
+        signInPage.assertIfElementsAreEqualOnSignInPage(
+                signInPage.elementGetText(signInPage.getErrorAboutEmptyField()),
+                "Error: fields are empty");
+    }
 
-        Assert.assertTrue(actualErrorMessageIsEnabled);
-        Assert.assertEquals(actualErrorMessage, "Error: fields are empty");
+    @Test
+    public void wrongCredentialsTest_updated() {
+        homePage.clickSignInBtn();
+        signInPage.fillTheSignFormWithCorrectData();
+        waitForVisibilityOf(signInPage.getErrorAboutWrongCredentialsUpdated(), 5);
+
+        signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
+        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
+        signInPage.assertIfElementsAreEqualOnSignInPage(
+                signInPage.elementGetText(signInPage.getErrorAboutWrongCredentialsUpdated()),
+                "Error: email is incorrect");
     }
 
     @Test
     @Ignore
-    public void wrongCredentialsTest() throws InterruptedException {
+    public void wrongCredentialsTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithCorrectData();
-        Thread.sleep(1000);
+        waitForVisibilityOf(signInPage.getErrorAboutWrongCredentials(), 5);
 
-        WebElement errorMessage = signInPage.getErrorAboutWrongCredentials();
-        boolean actualErrorMessageIsEnabled = errorMessage.isEnabled();
-        Thread.sleep(3000);
-        String actualErrorMessage = errorMessage.getText();
-
-        Assert.assertTrue(actualErrorMessageIsEnabled);
-        Assert.assertEquals(actualErrorMessage, "Error: credentials you provided are incorrect. Please try again. ");
+        signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentials());
+        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentials());
+        signInPage.assertIfElementsAreEqualOnSignInPage(
+                signInPage.elementGetText(signInPage.getErrorAboutWrongCredentials()),
+                "Error: credentials you provided are incorrect. Please try again. ");
     }
 
 
