@@ -60,30 +60,28 @@ public class SignInPage extends BaseMain {
         loginButton.click();
     }
 
-    public WebElement signInPageElement(By element) {
-        return driver.findElement(element);
+    public WebElement signInPageElement(WebElement element) {
+        return element;
     }
 
-    public boolean elementIsDisplayedOnSignInPage(By element) {
-        WebElement webElement = signInPageElement(element);
-        boolean actualElement = webElement.isDisplayed();
+    public boolean elementIsDisplayedOnSignInPage(WebElement element) {
+        boolean actualElement = element.isDisplayed();
         return actualElement;
     }
 
-    public boolean elementIsSelectedOnSignInPage(By element) {
-        WebElement webElement = signInPageElement(element);
-        boolean actualElement = webElement.isSelected();
+    public boolean elementIsSelectedOnSignInPage(WebElement element) {
+        boolean actualElement = element.isSelected();
         return actualElement;
     }
 
 
-    public String elementGetText(By element) {
+    public String elementGetText(WebElement element) {
         WebElement message = signInPageElement(element);
         String actualText = message.getText();
         return actualText;
     }
 
-    public void assertIfElementIsDisplayedOnSignInPage(By element) {
+    public void assertIfElementIsDisplayedOnSignInPage(WebElement element) {
         Assert.assertTrue(signInPageElement(element).isDisplayed());
     }
 
@@ -91,7 +89,7 @@ public class SignInPage extends BaseMain {
         Assert.assertEquals(actual, expected);
     }
 
-    public void assertIfElementIsSelectedOnSignInPage(By element) {
+    public void assertIfElementIsSelectedOnSignInPage(WebElement element) {
         Assert.assertTrue(signInPageElement(element).isSelected());
     }
 

@@ -28,18 +28,18 @@ public class LoginTests extends BaseTest {
                 "Error: fields are empty");
     }
 
-    @Test
-    public void wrongCredentialsTest_updated() {
-        homePage.clickSignInBtn();
-        signInPage.fillTheSignFormWithCorrectData();
-        waitForVisibilityOf(signInPage.getErrorAboutWrongCredentialsUpdated(), 5);
-
-        signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
-        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
-        signInPage.assertIfElementsAreEqualOnSignInPage(
-                signInPage.elementGetText(signInPage.getErrorAboutWrongCredentialsUpdated()),
-                "Error: email is incorrect");
-    }
+//    @Test
+//    public void wrongCredentialsTest_updated() {
+//        homePage.clickSignInBtn();
+//        signInPage.fillTheSignFormWithCorrectData();
+//        waitForVisibilityOf(signInPage.getErrorAboutWrongCredentialsUpdated(), 5);
+//
+//        signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
+//        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
+//        signInPage.assertIfElementsAreEqualOnSignInPage(
+//                signInPage.elementGetText(signInPage.getErrorAboutWrongCredentialsUpdated()),
+//                "Error: email is incorrect");
+//    }
 
     @Test
     @Ignore

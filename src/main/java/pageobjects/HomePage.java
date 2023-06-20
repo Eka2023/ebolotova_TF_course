@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 @Getter
@@ -12,24 +13,26 @@ public class HomePage extends BaseMain {
         super(dr);
     }
 
-    By signUpButton = By.xpath("//div[@id='sign-up-button']");
-    By signInButton = By.xpath("//div[text()='Sign In']");
+    @FindBy(xpath = "//div[@id='sign-up-button']")
+    WebElement signUpButton;
+
+    @FindBy(xpath = "//div[text()='Sign In']")
+    WebElement signInButton;
 
     public void clickSignInBtn() {
-        driver.findElement(signInButton).click();
+        signInButton.click();
     }
 
-    public WebElement homePageElement(By element) {
-        return driver.findElement(element);
+    public WebElement homePageElement(WebElement element) {
+        return element;
     }
 
-    public boolean elementIsDisplayedOnHomePage(By element) {
-        WebElement webElement = homePageElement(element);
-        boolean actualElement = webElement.isDisplayed();
+    public boolean elementIsDisplayedOnHomePage(WebElement element) {
+        boolean actualElement = element.isDisplayed();
         return actualElement;
     }
 
-    public void assertIfElementIsDisplayedOnHomePage(By element) {
+    public void assertIfElementIsDisplayedOnHomePage(WebElement element) {
         Assert.assertTrue(homePageElement(element).isDisplayed());
     }
 
