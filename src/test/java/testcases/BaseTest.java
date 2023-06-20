@@ -30,7 +30,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         homePage = new HomePage(driver);
         homePage.getURL();
-        waitForVisibilityOf(homePage.getSignInButton(),10);
+        waitForVisibilityOf(homePage.getSignInButton(), 10);
         signInPage = new SignInPage(driver);
     }
 
@@ -45,8 +45,7 @@ public class BaseTest {
     }
 
 
-
-    public void wait(ExpectedCondition<WebElement> condition, Integer timeOut){
+    public void wait(ExpectedCondition<WebElement> condition, Integer timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         wait.until(condition);
     }

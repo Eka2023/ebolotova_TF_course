@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 @Getter
 public class SignInPage extends BaseMain {
@@ -24,7 +25,7 @@ public class SignInPage extends BaseMain {
     By errorAboutIncorrectEmail = By.xpath("//p[text()='Error: email is incorrect']");
     By errorAboutEmptyField = By.xpath("//p[text()='Error: fields are empty']");
     By errorAboutWrongCredentials = By.xpath("//p[text()='Error: credentials you provided are incorrect. Please try again. ']");
-
+    By errorAboutWrongCredentialsUpdated = By.xpath("//p[text()='Error: email is incorrect']");
 
     public void fillTheSignFormWithIncorrectEmail() {
         driver.findElement(emailInputField).sendKeys(incorrectEmail);
@@ -45,8 +46,39 @@ public class SignInPage extends BaseMain {
         driver.findElement(loginButton).click();
     }
 
-    public WebElement signInPageElement(By element){
+    public WebElement signInPageElement(By element) {
         return driver.findElement(element);
+    }
+
+    public boolean elementIsDisplayedOnSignInPage(By element) {
+        WebElement webElement = signInPageElement(element);
+        boolean actualElement = webElement.isDisplayed();
+        return actualElement;
+    }
+
+    public boolean elementIsSelectedOnSignInPage(By element) {
+        WebElement webElement = signInPageElement(element);
+        boolean actualElement = webElement.isSelected();
+        return actualElement;
+    }
+
+
+    public String elementGetText(By element) {
+        WebElement message = signInPageElement(element);
+        String actualText = message.getText();
+        return actualText;
+    }
+
+    public void assertIfElementIsDisplayedOnSignInPage(By element) {
+        Assert.assertTrue(signInPageElement(element).isDisplayed());
+    }
+
+    public void assertIfElementsAreEqualOnSignInPage(String actual, String expected) {
+        Assert.assertEquals(actual, expected);
+    }
+
+    public void assertIfElementIsSelectedOnSignInPage(By element) {
+        Assert.assertTrue(signInPageElement(element).isSelected());
     }
 
 }

@@ -1,35 +1,40 @@
 package testcases;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ValidationTests extends BaseTest{
+public class ValidationTests extends BaseTest {
     @Test
     public void validateSignInAndSignUpButtonsPresented() {
-        boolean singInBtnIsPresented = homePage.homePageElement(homePage.getSignInButton()).isDisplayed();
-        boolean singUpBtnIsPresented = homePage.homePageElement(homePage.getSignUpButton()).isDisplayed();
+        /**  should it be deleted or not?
+         homePage.elementIsDisplayedOnHomePage(homePage.getSignInButton());
+         homePage.elementIsDisplayedOnHomePage(homePage.getSignUpButton());
+         */
 
-        Assert.assertTrue(singInBtnIsPresented);
-        Assert.assertTrue(singUpBtnIsPresented);
+        homePage.assertIfElementIsDisplayedOnHomePage(homePage.getSignInButton());
+        homePage.assertIfElementIsDisplayedOnHomePage(homePage.getSignUpButton());
     }
 
     @Test
     public void validateEmailPasswordFieldAndLoginButtonAreDisplayed() {
         homePage.clickSignInBtn();
-        boolean emailFieldIsDisplayed = signInPage.signInPageElement(signInPage.getEmailInputField()).isDisplayed();
-        boolean passwordFieldIsDisplayed = signInPage.signInPageElement(signInPage.getPasswordInputField()).isDisplayed();
-        boolean loginButtonIsDisplayed = signInPage.signInPageElement(signInPage.getLoginButton()).isDisplayed();
+        /** should it be deleted?
+         signInPage.elementIsDisplayedOnSignInPage(signInPage.getEmailInputField());
+         signInPage.elementIsDisplayedOnSignInPage(signInPage.getPasswordInputField());
+         signInPage.elementIsDisplayedOnSignInPage(signInPage.getLoginButton());
+         */
 
-        Assert.assertTrue(emailFieldIsDisplayed);
-        Assert.assertTrue(passwordFieldIsDisplayed);
-        Assert.assertTrue(loginButtonIsDisplayed);
+        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getEmailInputField());
+        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getPasswordInputField());
+        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getLoginButton());
     }
 
     @Test
     public void validationThatCheckboxRememberMeIsSelected() {
         homePage.clickSignInBtn();
-        boolean rememberMeCheckBoxIsSelected = signInPage.signInPageElement(signInPage.getCheckBoxRememberMe()).isSelected();
+        /** should be deleted?
+         signInPage.elementIsSelectedOnSignInPage(signInPage.getCheckBoxRememberMe());
+         */
 
-        Assert.assertTrue(rememberMeCheckBoxIsSelected);
+        signInPage.assertIfElementIsSelectedOnSignInPage(signInPage.getCheckBoxRememberMe());
     }
 }
