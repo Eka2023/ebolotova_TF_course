@@ -41,6 +41,8 @@ public class SignInPage extends BaseMain {
     @FindBy(xpath = "//p[text()='Error: credentials you provided are incorrect. Please try again. ']")
     WebElement errorAboutWrongCredentials;
 
+    @FindBy(xpath = "//p[text()='Error: email is incorrect']")
+    WebElement errorAboutWrongCredentialsUpdated;
 
     public void fillTheSignFormWithIncorrectEmail() {
         emailInputField.sendKeys(incorrectEmail);
