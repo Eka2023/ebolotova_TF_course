@@ -33,7 +33,6 @@ public class SignInPage extends BaseMain {
         driver.findElement(loginButton).click();
     }
 
-
     public void fillTheSignFormWithCorrectData() {
         driver.findElement(emailInputField).sendKeys(correctEmail);
         driver.findElement(passwordInputField).sendKeys(correctPassword);
@@ -68,17 +67,4 @@ public class SignInPage extends BaseMain {
         String actualText = message.getText();
         return actualText;
     }
-
-    public void assertIfElementIsDisplayedOnSignInPage(By element) {
-        Assert.assertTrue(signInPageElement(element).isDisplayed());
-    }
-
-    public void assertIfElementsAreEqualOnSignInPage(String actual, String expected) {
-        Assert.assertEquals(actual, expected);
-    }
-
-    public void assertIfElementIsSelectedOnSignInPage(By element) {
-        Assert.assertTrue(signInPageElement(element).isSelected());
-    }
-
 }

@@ -13,14 +13,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pageobjects.HomePage;
 import pageobjects.SignInPage;
+import pageobjects.SignUpPage;
 
 import java.time.Duration;
 
 public class BaseTest {
-
     WebDriver driver;
     HomePage homePage;
     SignInPage signInPage;
+    SignUpPage signUpPage;
 
     @BeforeMethod
     public void openDriver() {
@@ -32,6 +33,7 @@ public class BaseTest {
         homePage.getURL();
         waitForVisibilityOf(homePage.getSignInButton(), 10);
         signInPage = new SignInPage(driver);
+        signUpPage = new SignUpPage(driver);
     }
 
 //    @AfterTest

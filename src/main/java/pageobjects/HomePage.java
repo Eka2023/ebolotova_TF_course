@@ -19,6 +19,9 @@ public class HomePage extends BaseMain {
         driver.findElement(signInButton).click();
     }
 
+    public void clickSignUpBtn() {
+        driver.findElement(signUpButton).click();
+    }
     public WebElement homePageElement(By element) {
         return driver.findElement(element);
     }
@@ -27,10 +30,6 @@ public class HomePage extends BaseMain {
         WebElement webElement = homePageElement(element);
         boolean actualElement = webElement.isDisplayed();
         return actualElement;
-    }
-
-    public void assertIfElementIsDisplayedOnHomePage(By element) {
-        Assert.assertTrue(homePageElement(element).isDisplayed());
     }
 
 }

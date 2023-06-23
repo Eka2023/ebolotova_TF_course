@@ -10,8 +10,8 @@ public class LoginTests extends BaseTest {
         signInPage.fillTheSignFormWithIncorrectEmail();
         waitForVisibilityOf(signInPage.getErrorAboutIncorrectEmail(), 5);
         signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutIncorrectEmail());
-        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutIncorrectEmail());
-        signInPage.assertIfElementsAreEqualOnSignInPage(
+        signInPage.assertIfElementIsDisplayed(signInPage.getErrorAboutIncorrectEmail());
+        signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorAboutIncorrectEmail()),
                 "Error: email is incorrect");
     }
@@ -22,8 +22,8 @@ public class LoginTests extends BaseTest {
         signInPage.fillTheSignFormWithEmptyPassword();
         waitForVisibilityOf(signInPage.getErrorAboutEmptyField(), 5);
         signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutEmptyField());
-        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutEmptyField());
-        signInPage.assertIfElementsAreEqualOnSignInPage(
+        signInPage.assertIfElementIsDisplayed(signInPage.getErrorAboutEmptyField());
+        signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorAboutEmptyField()),
                 "Error: fields are empty");
     }
@@ -35,8 +35,8 @@ public class LoginTests extends BaseTest {
         waitForVisibilityOf(signInPage.getErrorAboutWrongCredentialsUpdated(), 5);
 
         signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
-        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
-        signInPage.assertIfElementsAreEqualOnSignInPage(
+        signInPage.assertIfElementIsDisplayed(signInPage.getErrorAboutWrongCredentialsUpdated());
+        signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorAboutWrongCredentialsUpdated()),
                 "Error: email is incorrect");
     }
@@ -49,8 +49,8 @@ public class LoginTests extends BaseTest {
         waitForVisibilityOf(signInPage.getErrorAboutWrongCredentials(), 5);
 
         signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentials());
-        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentials());
-        signInPage.assertIfElementsAreEqualOnSignInPage(
+        signInPage.assertIfElementIsDisplayed(signInPage.getErrorAboutWrongCredentials());
+        signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorAboutWrongCredentials()),
                 "Error: credentials you provided are incorrect. Please try again. ");
     }

@@ -5,36 +5,21 @@ import org.testng.annotations.Test;
 public class ValidationTests extends BaseTest {
     @Test
     public void validateSignInAndSignUpButtonsPresented() {
-        /**  should it be deleted or not?
-         homePage.elementIsDisplayedOnHomePage(homePage.getSignInButton());
-         homePage.elementIsDisplayedOnHomePage(homePage.getSignUpButton());
-         */
-
-        homePage.assertIfElementIsDisplayedOnHomePage(homePage.getSignInButton());
-        homePage.assertIfElementIsDisplayedOnHomePage(homePage.getSignUpButton());
+        homePage.assertIfElementIsDisplayed(homePage.getSignInButton());
+        homePage.assertIfElementIsDisplayed(homePage.getSignUpButton());
     }
 
     @Test
     public void validateEmailPasswordFieldAndLoginButtonAreDisplayed() {
         homePage.clickSignInBtn();
-        /** should it be deleted?
-         signInPage.elementIsDisplayedOnSignInPage(signInPage.getEmailInputField());
-         signInPage.elementIsDisplayedOnSignInPage(signInPage.getPasswordInputField());
-         signInPage.elementIsDisplayedOnSignInPage(signInPage.getLoginButton());
-         */
-
-        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getEmailInputField());
-        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getPasswordInputField());
-        signInPage.assertIfElementIsDisplayedOnSignInPage(signInPage.getLoginButton());
+        signInPage.assertIfElementIsDisplayed(signInPage.getEmailInputField());
+        signInPage.assertIfElementIsDisplayed(signInPage.getPasswordInputField());
+        signInPage.assertIfElementIsDisplayed(signInPage.getLoginButton());
     }
 
     @Test
     public void validationThatCheckboxRememberMeIsSelected() {
         homePage.clickSignInBtn();
-        /** should be deleted?
-         signInPage.elementIsSelectedOnSignInPage(signInPage.getCheckBoxRememberMe());
-         */
-
-        signInPage.assertIfElementIsSelectedOnSignInPage(signInPage.getCheckBoxRememberMe());
+        signInPage.assertIfElementIsSelected(signInPage.getCheckBoxRememberMe());
     }
 }
