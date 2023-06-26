@@ -27,6 +27,7 @@ public class BaseTest {
     public void openDriver() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
+
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         homePage = new HomePage(driver);
@@ -64,4 +65,16 @@ public class BaseTest {
         }
     }
 
+    protected void waitForVisibilityOf_test(By locator) {
+        int attempts = 0;
+        var wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        while (attempts < 2) {
+            try {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            } catch (StaleElementReferenceException ignored) {
+            }
+            attempts++;
+        }
+
+    }
 }

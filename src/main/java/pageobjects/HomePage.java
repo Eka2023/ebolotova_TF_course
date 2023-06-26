@@ -11,9 +11,8 @@ public class HomePage extends BaseMain {
     public HomePage(WebDriver dr) {
         super(dr);
     }
-
-    By signUpButton = By.xpath("//div[@id='sign-up-button']");
-    By signInButton = By.xpath("//div[text()='Sign In']");
+    By signUpButton = By.xpath("//a[contains(@href, 'register')]");
+    By signInButton = By.xpath("//a[contains(@href, 'login')]");
 
     public void clickSignInBtn() {
         driver.findElement(signInButton).click();

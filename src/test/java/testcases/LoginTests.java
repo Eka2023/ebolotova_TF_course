@@ -32,8 +32,7 @@ public class LoginTests extends BaseTest {
     public void wrongCredentialsTest_updated() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithCorrectData();
-        waitForVisibilityOf(signInPage.getErrorAboutWrongCredentialsUpdated(), 5);
-
+        waitForVisibilityOf(signInPage.getErrorAboutIncorrectEmail(), 5);
         signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentialsUpdated());
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorAboutWrongCredentialsUpdated());
         signInPage.assertIfElementsAreEqual(
@@ -46,8 +45,7 @@ public class LoginTests extends BaseTest {
     public void wrongCredentialsTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithCorrectData();
-        waitForVisibilityOf(signInPage.getErrorAboutWrongCredentials(), 5);
-
+        waitForVisibilityOf(signInPage.getErrorAboutIncorrectEmail(), 5);
         signInPage.elementIsDisplayedOnSignInPage(signInPage.getErrorAboutWrongCredentials());
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorAboutWrongCredentials());
         signInPage.assertIfElementsAreEqual(
