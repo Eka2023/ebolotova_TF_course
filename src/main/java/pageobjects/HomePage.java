@@ -25,10 +25,4 @@ public class HomePage extends BaseMain {
         return driver.findElement(element);
     }
 
-    public boolean elementIsDisplayedOnHomePage(By element) {
-        WebElement webElement = homePageElement(element);
-        boolean actualElement = webElement.isDisplayed();
-        return actualElement;
-    }
-
 }
