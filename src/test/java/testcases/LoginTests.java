@@ -20,6 +20,7 @@ public class LoginTests extends BaseTest {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithEmptyPassword();
         waitForVisibilityOf(signInPage.getErrorMessage(), 5);
+        //implicitWait();
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorMessage());
         signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorMessage()),

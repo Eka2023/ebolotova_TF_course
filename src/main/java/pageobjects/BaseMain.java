@@ -2,7 +2,6 @@ package pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class BaseMain {
@@ -29,7 +28,5 @@ public class BaseMain {
     public void assertIfElementIsSelected(By element) {
         Assert.assertTrue(driver.findElement(element).isSelected());
     }
-
-
 
 }
