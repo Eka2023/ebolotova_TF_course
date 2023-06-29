@@ -71,6 +71,15 @@ public class BaseTest {
         }
     }
 
+    protected void waitForVisibilityOf_1(By locator, Integer timeOutInSeconds) {
+        try {
+            wait(ExpectedConditions.visibilityOfElementLocated(locator),
+                    timeOutInSeconds);
+        } catch (NoSuchElementException e) {
+            System.out.println("NoSuchElementException - -> Element not found");
+        }
+    }
+
     protected void switchToWindow(int tab) {
         List<String> tabHandler = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabHandler.get(tab));
@@ -80,6 +89,7 @@ public class BaseTest {
         List<String> tabHandler = new ArrayList<>(driver.getWindowHandles());
         return tabHandler.size();
     }
+
     protected void refreshWindow() {
         driver.navigate().refresh();
     }

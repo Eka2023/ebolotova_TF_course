@@ -45,8 +45,6 @@ public class SignInPage extends BaseMain {
     }
 
     public String elementGetText(By element) {
-        WebElement message = signInPageElement(element);
-        String actualText = message.getText();
-        return actualText;
+        return signInPageElement(element).getText();
     }
 }

@@ -20,8 +20,5 @@ public class HomePage extends BaseMain {
     public void clickSignUpBtn() {
         driver.findElement(signUpButton).click();
     }
-    public WebElement homePageElement(By element) {
-        return driver.findElement(element);
-    }
 
 }
