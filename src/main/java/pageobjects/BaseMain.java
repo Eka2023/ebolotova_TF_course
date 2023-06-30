@@ -2,6 +2,7 @@ package pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class BaseMain {
@@ -11,10 +12,16 @@ public class BaseMain {
 
     public BaseMain(WebDriver dr) {
         this.driver = dr;
+
     }
 
-    public void getURL() {
+    public String getBaseURL() {
         driver.get(baseURL);
+        return baseURL;
+    }
+
+    public WebElement pageElement(By element) {
+        return driver.findElement(element);
     }
 
     public void assertIfElementIsDisplayed(By element) {

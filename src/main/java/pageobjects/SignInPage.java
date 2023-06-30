@@ -40,11 +40,7 @@ public class SignInPage extends BaseMain {
         driver.findElement(loginButton).click();
     }
 
-    public WebElement signInPageElement(By element) {
-        return driver.findElement(element);
-    }
-
     public String elementGetText(By element) {
-        return signInPageElement(element).getText();
+        return pageElement(element).getText();
     }
 }

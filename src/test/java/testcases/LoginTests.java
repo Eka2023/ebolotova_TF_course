@@ -8,7 +8,7 @@ public class LoginTests extends BaseTest {
     public void enteringWrongEmailTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithIncorrectEmail();
-        waitForVisibilityOf_1(signInPage.getErrorMessage(), 5);
+        waitForVisibilityOf(signInPage.getErrorMessage(), 5);
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorMessage());
         signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorMessage()),
@@ -19,8 +19,7 @@ public class LoginTests extends BaseTest {
     public void enteringEmptyFieldTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithEmptyPassword();
-        waitForVisibilityOf_1(signInPage.getErrorMessage(), 5);
-        //implicitWait();
+        waitForVisibilityOf(signInPage.getErrorMessage(), 5);
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorMessage());
         signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorMessage()),
@@ -31,7 +30,7 @@ public class LoginTests extends BaseTest {
     public void wrongCredentialsTest_updated() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithCorrectData();
-        waitForVisibilityOf_1(signInPage.getErrorMessage(), 5);
+        waitForVisibilityOf(signInPage.getErrorMessage(), 5);
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorMessage());
         signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorMessage()),

@@ -8,7 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import pageobjects.HomePage;
 import pageobjects.SignInPage;
 import pageobjects.SignUpPage;
@@ -27,13 +29,12 @@ public class BaseTest {
     public void openDriver() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
-
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         homePage = new HomePage(driver);
-        homePage.getURL();
+        homePage.getBaseURL();
         signInPage = new SignInPage(driver);
         signUpPage = new SignUpPage(driver);
 
@@ -60,18 +61,6 @@ public class BaseTest {
     }
 
     protected void waitForVisibilityOf(By locator, Integer timeOutInSeconds) {
-        int attempts = 0;
-        while (attempts < 2) {
-            try {
-                wait(ExpectedConditions.visibilityOfElementLocated(locator),
-                        timeOutInSeconds);
-            } catch (StaleElementReferenceException ignored) {
-            }
-            attempts++;
-        }
-    }
-
-    protected void waitForVisibilityOf_1(By locator, Integer timeOutInSeconds) {
         try {
             wait(ExpectedConditions.visibilityOfElementLocated(locator),
                     timeOutInSeconds);
