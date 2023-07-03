@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Parallel Whole TestSuite" parallel="classes" thread-count="3" >
+<suite name="Parallel Whole TestSuite" parallel="classes" thread-count="4" >
     <test name="Parallel Test Suite">
         <classes>
             <class name="testcases.LoginTests"></class>
             <class name="testcases.ValidationTests"></class>
             <class name="testcases.DropdownTests"></class>
+            <class name="testcases.DriverInteractions"></class>
         </classes>
     </test>
 </suite>
