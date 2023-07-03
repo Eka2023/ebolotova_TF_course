@@ -1,15 +1,16 @@
 package pageobjects;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Getter
 public class SignUpPage extends BaseMain {
 
     public SignUpPage(WebDriver dr) {
@@ -19,6 +20,12 @@ public class SignUpPage extends BaseMain {
     By jobTitleList = By.id("job-title");
     By jobTitle = By.xpath("//select[@id='job-title']//option");
 
+    By otherInfoBlock = By.xpath("//div[contains(@class, 'other-info-block')]");
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
     public List<String> getJobTitleList() {
         WebElement dropDownElement = driver.findElement(jobTitleList);
         Select searchDropDown = new Select(dropDownElement);
@@ -26,7 +33,6 @@ public class SignUpPage extends BaseMain {
         List<String> resultList = new ArrayList<>();
         for (int i = 0; i < list.size()-1; i++) {
             resultList.add(list.get(i).getText());
-            //System.out.println(list.get(i).getText());
         }
         return resultList;
     }
@@ -93,7 +99,4 @@ public class SignUpPage extends BaseMain {
         return expectedList;
     }
 
-    public void assertActualAndExpectedList(List<String> actual, List<String> expected) {
-        Assert.assertEquals(expected,actual);
-    }
 }

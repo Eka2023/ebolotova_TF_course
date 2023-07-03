@@ -8,9 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import pageobjects.HomePage;
 import pageobjects.SignInPage;
 import pageobjects.SignUpPage;
@@ -114,4 +112,6 @@ public class BaseTest {
     protected void assertEquality(int actual, int expected) {
         Assert.assertEquals(actual, expected);
     }
+
+
 }
