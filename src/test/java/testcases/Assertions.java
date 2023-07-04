@@ -33,14 +33,13 @@ public class Assertions extends BaseTest{
         String actualTitle = signUpPage.getPageTitle();
         int actualJobTitleListSize = signUpPage.getJobTitleList().size();
 
-        SoftAssert sa = new SoftAssert();
-        sa.assertEquals(actualTitle, expectedTitle, "Title is not correct");
-        sa.assertEquals(actualJobTitleListSize, expectedJobTitleListSize, "Size of the list is not correct");
-        sa.assertEquals(signUpPage.getOtherInfoBlock(), expectedDisplayed);
-        sa.assertEquals(
+        signUpPage.softAssertIfElementsAreEqual(actualTitle, expectedTitle, "Title is not correct");
+        signUpPage.softAssertIfElementsAreEqual(actualJobTitleListSize, expectedJobTitleListSize, "Size of the list is not correct");
+        signUpPage.softAssertIfElementIsDisplayed_boolean(signUpPage.getOtherInfoBlock(), expectedDisplayed);
+        signUpPage.softAssertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("developer"),
                 signUpPage.expectedDevJobTitleList());
-        sa.assertAll();
+        signUpPage.softAssertAll();
     }
 
 }
