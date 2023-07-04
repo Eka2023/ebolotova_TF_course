@@ -13,6 +13,8 @@ public class BaseMain {
     WebDriver driver;
     String baseURL = "https://test.my-fork.com/";
 
+    SoftAssert softAssert = new SoftAssert();
+
     public BaseMain(WebDriver dr) {
         this.driver = dr;
 
@@ -59,17 +61,11 @@ public class BaseMain {
         Assert.assertEquals(expected, actual);
     }
 
-    public SoftAssert softAssert() {
-        SoftAssert softAssert = new SoftAssert();
-        return softAssert;
-    }
     public void softAssertActualAndExpectedList(List<String> actual, List<String> expected) {
-        SoftAssert softAssert = softAssert();
         softAssert.assertEquals(actual, expected);
     }
 
     public void softAssertIfElementsAreEqual(String actual, String expected, String... message) {
-        SoftAssert softAssert = softAssert();
         try {
             softAssert.assertEquals(actual, expected);
         } catch (Exception e) {
@@ -77,7 +73,6 @@ public class BaseMain {
         }
     }
     public void softAssertIfElementsAreEqual(int actual, int expected, String... message) {
-        SoftAssert softAssert = softAssert();
         try {
             softAssert.assertEquals(actual, expected);
         } catch (Exception e) {
@@ -86,12 +81,10 @@ public class BaseMain {
     }
 
     public void softAssertIfElementIsDisplayed_boolean(By element, boolean value) {
-        SoftAssert softAssert = softAssert();
         softAssert.assertEquals(driver.findElement(element).isDisplayed(), value);
     }
 
     public void softAssertAll() {
-        SoftAssert softAssert = softAssert();
         softAssert.assertAll();
     }
 

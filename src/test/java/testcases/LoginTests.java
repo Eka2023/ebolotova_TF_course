@@ -3,12 +3,12 @@ package testcases;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-public class LoginTests extends BaseTest {
-    @Test
+public class LoginTests extends BaseTest{
+        @Test
     public void enteringWrongEmailTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithIncorrectEmail();
-        waitForVisibilityOf(signInPage.getErrorMessage(), 5);
+        //waitForVisibilityOf(signInPage.getErrorMessage(), 5);
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorMessage());
         signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorMessage()),
@@ -19,7 +19,7 @@ public class LoginTests extends BaseTest {
     public void enteringEmptyFieldTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithEmptyPassword();
-        waitForVisibilityOf(signInPage.getErrorMessage(), 5);
+        //waitForVisibilityOf(signInPage.getErrorMessage(), 5);
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorMessage());
         signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorMessage()),
@@ -30,7 +30,7 @@ public class LoginTests extends BaseTest {
     public void wrongCredentialsTest_updated() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithCorrectData();
-        waitForVisibilityOf(signInPage.getErrorMessage(), 5);
+        //waitForVisibilityOf(signInPage.getErrorMessage(), 5);
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorMessage());
         signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorMessage()),
@@ -42,7 +42,7 @@ public class LoginTests extends BaseTest {
     public void wrongCredentialsTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithCorrectData();
-        waitForVisibilityOf(signInPage.getErrorMessage(), 5);
+        //waitForVisibilityOf(signInPage.getErrorMessage(), 5);
         signInPage.assertIfElementIsDisplayed(signInPage.getErrorMessage());
         signInPage.assertIfElementsAreEqual(
                 signInPage.elementGetText(signInPage.getErrorMessage()),
