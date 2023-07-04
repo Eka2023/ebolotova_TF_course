@@ -6,6 +6,7 @@
             <class name="testcases.LoginTests"></class>
             <class name="testcases.ValidationTests"></class>
             <class name="testcases.DropdownTests"></class>
+            <class name="testcases.DriverInteractions"></class>
         </classes>
     </test>
 </suite>
