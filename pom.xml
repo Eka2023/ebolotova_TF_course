@@ -43,6 +43,8 @@
                     <version>3.11.0</version>
                     <configuration>
                         <!-- put your configurations here -->
+                        <source>20</source>
+                        <target>20</target>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -53,7 +55,7 @@
                         <suiteXmlFiles>
 <!--                            <suiteXmlFile>src/test/resources/runner/wholeTestSuiteRun.xml</suiteXmlFile>-->
                            <suiteXmlFile>src/test/resources/runner/parallelByClasses.xml</suiteXmlFile>
-<!--                           <suiteXmlFile>src/resources/java/runner/parallelByTests.xml</suiteXmlFile>-->
+<!--                           <suiteXmlFile>src/test/resources/runner/parallelByTests.xml</suiteXmlFile>-->
                         </suiteXmlFiles>
                         <reportsDirectory>./test-output/${timestamp}</reportsDirectory>
                     </configuration>
