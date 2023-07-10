@@ -1,8 +1,6 @@
 package pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 
 public class BaseMain {
@@ -22,6 +20,16 @@ public class BaseMain {
 
     public WebElement pageElement(By element) {
         return driver.findElement(element);
+    }
+
+    public void openNewWindowTab() {
+        driver.switchTo().newWindow(WindowType.TAB);
+    }
+
+    public void scrollingPage(int pixels) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0," + pixels + ")", "");
+
     }
 
     public void assertIfElementIsDisplayed(By element) {

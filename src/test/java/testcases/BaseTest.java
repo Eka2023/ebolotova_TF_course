@@ -8,9 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import pageobjects.HomePage;
 import pageobjects.SignInPage;
 import pageobjects.SignUpPage;
@@ -97,15 +95,15 @@ public class BaseTest {
         return driver.getTitle();
     }
 
-    protected void openNewWindowTab() {
-        driver.switchTo().newWindow(WindowType.TAB);
-    }
-
-    protected void scrollingPage(int pixels) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0," + pixels + ")", "");
-
-    }
+//    protected void openNewWindowTab() {
+//        driver.switchTo().newWindow(WindowType.TAB);
+//    }
+//
+//    protected void scrollingPage(int pixels) {
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("window.scrollBy(0," + pixels + ")", "");
+//
+//    }
 
     protected void assertEquality(String actual, String expected) {
         Assert.assertEquals(actual, expected);

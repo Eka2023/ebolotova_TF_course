@@ -22,10 +22,10 @@ public class DriverInteractions extends BaseTest {
 
     @Test
     public void testOpenedTab() {
-        openNewWindowTab();
-        openNewWindowTab();
+        signInPage.openNewWindowTab();
+        signInPage.openNewWindowTab();
         navigateToAnotherURL("http://amazon.com");
-        openNewWindowTab();
+        signInPage.openNewWindowTab();
         assertEquality(getQuantityOfOpenedTabs(), 4);
         switchToWindow(0);
         switchToWindow(2);
@@ -36,7 +36,7 @@ public class DriverInteractions extends BaseTest {
     @Test
     public void testJSscroll() {
         driver.get("http://amazon.com");
-        scrollingPage(3000);
-        scrollingPage(-2500);
+        homePage.scrollingPage(3000);
+        homePage.scrollingPage(-2500);
     }
 }
