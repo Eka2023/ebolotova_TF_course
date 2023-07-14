@@ -1,0 +1,37 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="POM Whole TestSuite" verbose="1">
+    <test name="Whole Suite Tests">
+        <groups>
+            <run>
+                <include name="high"></include>
+                <include name="medium"></include>
+                <exclude name="low"></exclude>
+                <exclude name="the lowest"></exclude>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="testcases.Assertions">
+                <methods>
+                    <exclude name="softAssertions"></exclude>
+                    <exclude name="hardAssertions"></exclude>
+                </methods>
+            </class>
+            <class name="testcases.ValidationTests"></class>
+            <class name="testcases.DriverInteractions">
+                <methods>
+                    <exclude name="testCurrentUrl"></exclude>
+                    <exclude name="testTitle"></exclude>
+                    <exclude name="testOpenedTab"></exclude>
+                    <exclude name="testJSscroll"></exclude>
+                </methods>
+            </class>
+            <class name="testcases.DropdownTests"></class>
+            <class name="testcases.LoginTests">
+            </class>
+        </classes>
+    </test>
+
+</suite>
+

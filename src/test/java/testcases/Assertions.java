@@ -5,7 +5,7 @@ import org.testng.asserts.SoftAssert;
 
 public class Assertions extends BaseTest{
 
-    @Test
+    @Test(groups = {"low"})
     public void hardAssertions(){
         String expectedTitle = "Sign Up";
         int expectedJobTitleListSize = 13;
@@ -23,12 +23,11 @@ public class Assertions extends BaseTest{
                 signUpPage.expectedDevJobTitleList());
     }
 
-    @Test
+    @Test(groups = {"medium"})
     public void softAssertions(){
         String expectedTitle = "Sign";
         int expectedJobTitleListSize = 12;
         boolean expectedDisplayed = false;
-
         homePage.clickSignUpBtn();
         String actualTitle = signUpPage.getPageTitle();
         int actualJobTitleListSize = signUpPage.getJobTitleList().size();

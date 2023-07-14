@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class DropdownTests extends BaseTest{
 
-    @Test
+    @Test(priority = 1, groups = {"high"})
     public void printAllJobTitleList() {
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
@@ -12,7 +12,7 @@ public class DropdownTests extends BaseTest{
                 signUpPage.expectedJobTitleList());
     }
 
-    @Test
+    @Test(priority = 4, groups = {"medium"})
     public void printDevJobTitleList() {
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
@@ -20,7 +20,7 @@ public class DropdownTests extends BaseTest{
                 signUpPage.expectedDevJobTitleList());
     }
 
-    @Test
+    @Test(priority = 3, groups = {"medium"})
     public void printQAJobTitleList() {
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
@@ -28,7 +28,7 @@ public class DropdownTests extends BaseTest{
                 signUpPage.expectedQAJobTitleList());
     }
 
-    @Test
+    @Test(priority = 6, groups = {"the lowest"})
     public void printAnalystJobTitleList() {
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
@@ -36,14 +36,14 @@ public class DropdownTests extends BaseTest{
                 signUpPage.expectedAnalystJobTitleList());
     }
 
-    @Test
+    @Test(priority = 5, groups = {"low"})
     public void printBAJobTitleList() {
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("business"),
                 signUpPage.expectedBAJobTitleList());
     }
-    @Test
+    @Test(priority = 2, groups = {"high"})
     public void printAllJobTitleWithoutSeleniumSelection() {
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(

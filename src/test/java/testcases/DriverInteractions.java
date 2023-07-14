@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class DriverInteractions extends BaseTest {
 
-    @Test
+    @Test(groups = {"medium"})
     public void testCurrentUrl() {
         refreshWindow();
         homePage.clickSignInBtn();
@@ -13,14 +13,14 @@ public class DriverInteractions extends BaseTest {
         assertEquality(currentURL, "https://test.my-fork.com/login");
     }
 
-    @Test
+    @Test(groups = {"medium"})
     public void testTitle() {
         homePage.clickSignInBtn();
         String pageTitle = getTitle();
         assertEquality(pageTitle, "Sign in");
     }
 
-    @Test
+    @Test(groups = {"the lowest"})
     public void testOpenedTab() {
         openNewWindowTab();
         openNewWindowTab();
@@ -33,7 +33,7 @@ public class DriverInteractions extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups = {"medium"})
     public void testJSscroll() {
         driver.get("http://amazon.com");
         scrollingPage(3000);

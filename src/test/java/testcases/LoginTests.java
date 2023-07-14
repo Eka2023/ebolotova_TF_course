@@ -1,10 +1,9 @@
 package testcases;
 
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest{
-        @Test
+        @Test(priority = 1, groups = {"high"})
     public void enteringWrongEmailTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithIncorrectEmail();
@@ -15,7 +14,7 @@ public class LoginTests extends BaseTest{
                 "Error: email is incorrect");
     }
 
-    @Test
+    @Test(priority = 3, groups = {"high"})
     public void enteringEmptyFieldTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithEmptyPassword();
@@ -26,7 +25,7 @@ public class LoginTests extends BaseTest{
                 "Error: fields are empty");
     }
 
-    @Test
+    @Test(priority = 2, groups = {"high", "medium"})
     public void wrongCredentialsTest_updated() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithCorrectData();
@@ -37,8 +36,7 @@ public class LoginTests extends BaseTest{
                 "Error: email is incorrect");
     }
 
-    @Test
-    @Ignore
+    @Test(priority = 4, groups = {"the lowest"})
     public void wrongCredentialsTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithCorrectData();

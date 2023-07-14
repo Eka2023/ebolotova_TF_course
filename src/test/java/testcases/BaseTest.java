@@ -23,7 +23,7 @@ public class BaseTest {
     SignInPage signInPage;
     SignUpPage signUpPage;
 
-    @BeforeMethod
+    @BeforeMethod(groups = {"high"})
     public void openDriver() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
@@ -46,7 +46,7 @@ public class BaseTest {
 
     }
 
-    @AfterMethod
+    @AfterMethod(groups = {"high"})
     public void quitDriver() {
         if (driver != null) {
             driver.quit();
