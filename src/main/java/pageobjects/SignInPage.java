@@ -13,7 +13,7 @@ public class SignInPage extends BaseMain {
 
     String correctEmail = "bolotova.katya@gmail.com";
     String correctPassword = "password";
-    String incorrectEmail = "bolotova";
+    String incorrectEmail = "ebolotov";
     String emptyPassword = "";
 
     By emailInputField = By.xpath("//input[@id='email']");
@@ -21,6 +21,13 @@ public class SignInPage extends BaseMain {
     By loginButton = By.xpath("//button[@type='submit']");
     By checkBoxRememberMe = By.xpath("//input[@id='auth-page-remember-me']");
     By errorMessage = By.xpath("//p[contains(text(), 'Error') and @class  = '']");
+
+
+    public void fillInLoginForm(String name, String password){
+        driver.findElement(emailInputField).sendKeys(name);
+        driver.findElement(passwordInputField).sendKeys(password);
+        driver.findElement(loginButton).click();
+    }
 
     public void fillTheSignFormWithIncorrectEmail() {
         driver.findElement(emailInputField).sendKeys(incorrectEmail);

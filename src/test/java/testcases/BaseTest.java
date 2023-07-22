@@ -9,19 +9,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pageobjects.CourseGalleryPage;
 import pageobjects.HomePage;
 import pageobjects.SignInPage;
 import pageobjects.SignUpPage;
+import pageobjects.coursepages.SQL101BasicsPage;
+import utils.ExpectedData;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseTest {
+public class BaseTest extends ExpectedData {
     WebDriver driver;
     HomePage homePage;
     SignInPage signInPage;
     SignUpPage signUpPage;
+    CourseGalleryPage courseGalleryPage;
+    SQL101BasicsPage sql101BasicsPage;
 
     @BeforeMethod(groups = {"high"})
     public void openDriver() {
@@ -35,6 +40,8 @@ public class BaseTest {
         homePage.getBaseURL();
         signInPage = new SignInPage(driver);
         signUpPage = new SignUpPage(driver);
+        courseGalleryPage = new CourseGalleryPage(driver);
+        sql101BasicsPage = new SQL101BasicsPage(driver);
 
         /**
          *         This example slows down tests in two times:
@@ -58,7 +65,7 @@ public class BaseTest {
         wait.until(condition);
     }
 
-    protected void waitForVisibilityOf(By locator, Integer timeOutInSeconds) {
+    public void waitForVisibilityOf(By locator, Integer timeOutInSeconds) {
         try {
             wait(ExpectedConditions.visibilityOfElementLocated(locator),
                     timeOutInSeconds);

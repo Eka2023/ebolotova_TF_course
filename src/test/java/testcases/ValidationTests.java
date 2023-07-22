@@ -5,16 +5,16 @@ import org.testng.annotations.Test;
 public class ValidationTests extends BaseTest {
     @Test(priority = 2, groups = {"high"})
     public void validateSignInAndSignUpButtonsPresented() {
-        homePage.assertIfElementIsDisplayed(homePage.getSignInButton());
-        homePage.assertIfElementIsDisplayed(homePage.getSignUpButton());
+        homePage.checkIfElementIsDisplayedOrNot(homePage.getSignInButton(), true);
+        homePage.checkIfElementIsDisplayedOrNot(homePage.getSignUpButton(), true);
     }
 
     @Test(priority = 1, groups = {"high"})
     public void validateEmailPasswordFieldAndLoginButtonAreDisplayed() {
         homePage.clickSignInBtn();
-        signInPage.assertIfElementIsDisplayed(signInPage.getEmailInputField());
-        signInPage.assertIfElementIsDisplayed(signInPage.getPasswordInputField());
-        signInPage.assertIfElementIsDisplayed(signInPage.getLoginButton());
+        signInPage.checkIfElementIsDisplayedOrNot(signInPage.getEmailInputField(), true);
+        signInPage.checkIfElementIsDisplayedOrNot(signInPage.getPasswordInputField(), true);
+        signInPage.checkIfElementIsDisplayedOrNot(signInPage.getLoginButton(), true);
     }
 
     @Test(priority = 3, groups = {"low"})

@@ -9,7 +9,7 @@ public class DropdownTests extends BaseTest{
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
                 signUpPage.getJobTitleList(),
-                signUpPage.expectedJobTitleList());
+                expectedJobTitleList());
     }
 
     @Test(priority = 4, groups = {"medium"})
@@ -17,7 +17,7 @@ public class DropdownTests extends BaseTest{
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("developer"),
-                signUpPage.expectedDevJobTitleList());
+                expectedDevJobTitleList());
     }
 
     @Test(priority = 3, groups = {"medium"})
@@ -25,7 +25,7 @@ public class DropdownTests extends BaseTest{
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("test", "QA"),
-                signUpPage.expectedQAJobTitleList());
+                expectedQAJobTitleList());
     }
 
     @Test(priority = 6, groups = {"the lowest"})
@@ -33,7 +33,7 @@ public class DropdownTests extends BaseTest{
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("analyst"),
-                signUpPage.expectedAnalystJobTitleList());
+                expectedAnalystJobTitleList());
     }
 
     @Test(priority = 5, groups = {"low"})
@@ -41,14 +41,14 @@ public class DropdownTests extends BaseTest{
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("business"),
-                signUpPage.expectedBAJobTitleList());
+                expectedBAJobTitleList());
     }
     @Test(priority = 2, groups = {"high"})
     public void printAllJobTitleWithoutSeleniumSelection() {
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(
                 signUpPage.getJobTitleListWithoutSeleniumSelect(),
-                signUpPage.expectedJobTitleList());
+                expectedJobTitleList());
 
     }
 

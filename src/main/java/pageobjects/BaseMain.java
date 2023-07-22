@@ -1,18 +1,21 @@
 package pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
+import static org.testng.FileAssert.fail;
+
 public class BaseMain {
 
-    WebDriver driver;
+    public WebDriver driver;
     String baseURL = "https://test.my-fork.com/";
-
     SoftAssert softAssert = new SoftAssert();
 
     public BaseMain(WebDriver dr) {
@@ -24,17 +27,33 @@ public class BaseMain {
         driver.get(baseURL);
         return baseURL;
     }
-
     public WebElement pageElement(By element) {
         return driver.findElement(element);
     }
 
-    public void assertIfElementIsDisplayed(By element) {
-        Assert.assertTrue(driver.findElement(element).isDisplayed());
+    public void navigationViaBrowserBack(){
+        driver.navigate().back();
+    }
+    public void checkIfElementIsDisplayedOrNot(By element, boolean value) {
+        Assert.assertEquals(driver.findElement(element).isDisplayed(), value);
     }
 
-    public void assertIfElementIsDisplayed_boolean(By element, boolean value) {
-        Assert.assertEquals(driver.findElement(element).isDisplayed(), value);
+    public void checkAbsenceOfElement(By element) {
+        Boolean notPresent = ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(element)).apply(driver);
+        Assert.assertTrue(notPresent);
+
+        //Assert.assertTrue(!isElementPresent(By.linkText("Empresas en Misión")));
+
+        //Assert.assertFalse(driver.findElement(element).isDisplayed());
+    }
+
+    public void assertElementIsNotPresent(By element) {
+        try {
+            driver.findElement(element);
+            fail("Element is not presented");
+        } catch (NoSuchElementException ex) {
+            /* do nothing, link is not present, assert is passed */
+        }
     }
 
     public void assertIfElementsAreEqual(String actual, String expected, String... message) {

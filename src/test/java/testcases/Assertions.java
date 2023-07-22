@@ -1,7 +1,6 @@
 package testcases;
 
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class Assertions extends BaseTest{
 
@@ -17,10 +16,10 @@ public class Assertions extends BaseTest{
 
         signUpPage.assertIfElementsAreEqual(actualTitle, expectedTitle, "Title is not correct");
         signUpPage.assertIfElementsAreEqual(actualJobTitleListSize, expectedJobTitleListSize, "Size of the list is not correct");
-        signUpPage.assertIfElementIsDisplayed_boolean(signUpPage.getOtherInfoBlock(), expectedDisplayed);
+        signUpPage.checkIfElementIsDisplayedOrNot(signUpPage.getOtherInfoBlock(), expectedDisplayed);
         signUpPage.assertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("developers"),
-                signUpPage.expectedDevJobTitleList());
+                expectedDevJobTitleList());
     }
 
     @Test(groups = {"medium"})
@@ -37,7 +36,7 @@ public class Assertions extends BaseTest{
         signUpPage.softAssertIfElementIsDisplayed_boolean(signUpPage.getOtherInfoBlock(), expectedDisplayed);
         signUpPage.softAssertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("developer"),
-                signUpPage.expectedDevJobTitleList());
+                expectedDevJobTitleList());
         signUpPage.softAssertAll();
     }
 
