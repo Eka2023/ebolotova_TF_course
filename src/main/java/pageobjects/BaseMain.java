@@ -1,9 +1,6 @@
 package pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -36,15 +33,6 @@ public class BaseMain {
     }
     public void checkIfElementIsDisplayedOrNot(By element, boolean value) {
         Assert.assertEquals(driver.findElement(element).isDisplayed(), value);
-    }
-
-    public void checkAbsenceOfElement(By element) {
-        Boolean notPresent = ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(element)).apply(driver);
-        Assert.assertTrue(notPresent);
-
-        //Assert.assertTrue(!isElementPresent(By.linkText("Empresas en Misión")));
-
-        //Assert.assertFalse(driver.findElement(element).isDisplayed());
     }
 
     public void assertElementIsNotPresent(By element) {

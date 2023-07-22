@@ -3,7 +3,6 @@ package testcases;
 import org.testng.annotations.Test;
 
 public class SelfPracticeTests extends BaseTest {
-
     @Test
     public void historyIsAvailableForLoggedInUsersOnlyTest() {
         homePage.clickCourseGalleryBtn();
@@ -34,17 +33,16 @@ public class SelfPracticeTests extends BaseTest {
         assertEquality(courseGalleryPage.getNumOfQuestionsInStringFormat("Development", "SQL 101 (Basics)"),
                 "0 / 9");
         courseGalleryPage.clickStartBtnInCourse("Development", "SQL 101 (Basics)");
-        //assertEquality(sql101BasicsPage.getQuestionNumber(), "1");
+        switchToWindow(1);
+        sql101BasicsPage.printQuestionName();
+        assertEquality(sql101BasicsPage.getQuestionNumber(), "1");
         assertEquality(sql101BasicsPage.getProgressBarValue(), 0);
         sql101BasicsPage.clickToAnswer(0);
         assertEquality(sql101BasicsPage.getProgressBarValue(), 11);
         sql101BasicsPage.clickNextBtn();
-        assertEquality(sql101BasicsPage.getQuestionNumber(), "1");
-        sql101BasicsPage.clickToAnswer(0);
+        assertEquality(sql101BasicsPage.getQuestionNumber(), "2");
+        sql101BasicsPage.clickToAnswerOtherPages(0);
         assertEquality(sql101BasicsPage.getProgressBarValue(), 22);
-
-
     }
-
 
 }
