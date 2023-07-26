@@ -14,6 +14,7 @@ import pageobjects.HomePage;
 import pageobjects.SignInPage;
 import pageobjects.SignUpPage;
 import pageobjects.coursepages.SQL101BasicsPage;
+import pageobjects.coursepages.SQL101TestPage;
 import utils.ExpectedData;
 
 import java.time.Duration;
@@ -27,6 +28,7 @@ public class BaseTest extends ExpectedData {
     SignUpPage signUpPage;
     CourseGalleryPage courseGalleryPage;
     SQL101BasicsPage sql101BasicsPage;
+    SQL101TestPage sql101TestPage;
 
     @BeforeMethod(groups = {"high"})
     public void openDriver() {
@@ -42,6 +44,8 @@ public class BaseTest extends ExpectedData {
         signUpPage = new SignUpPage(driver);
         courseGalleryPage = new CourseGalleryPage(driver);
         sql101BasicsPage = new SQL101BasicsPage(driver);
+        sql101TestPage = new SQL101TestPage(driver);
+
 
         /**
          *         This example slows down tests in two times:
@@ -113,6 +117,10 @@ public class BaseTest extends ExpectedData {
     }
 
     protected void assertEquality(String actual, String expected) {
+        Assert.assertEquals(actual, expected);
+    }
+
+    protected void assertEquality(double actual, double expected) {
         Assert.assertEquals(actual, expected);
     }
 

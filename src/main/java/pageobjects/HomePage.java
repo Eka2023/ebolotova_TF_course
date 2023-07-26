@@ -32,4 +32,8 @@ public class HomePage extends BaseMain {
         driver.findElement(courseGalleryBtn).click();
     }
 
+    public void validationOfGalleryBtn(){
+        checkIfElementIsDisplayedOrNot(getCourseGalleryBtn(), true);
+    }
+
 }

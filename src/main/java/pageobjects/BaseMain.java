@@ -1,7 +1,6 @@
 package pageobjects;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -35,7 +34,7 @@ public class BaseMain {
         Assert.assertEquals(driver.findElement(element).isDisplayed(), value);
     }
 
-    public void assertElementIsNotPresent(By element) {
+    public void checkElementIsNotPresent(By element) {
         try {
             driver.findElement(element);
             fail("Element is not presented");
@@ -45,6 +44,14 @@ public class BaseMain {
     }
 
     public void assertIfElementsAreEqual(String actual, String expected, String... message) {
+        try {
+            Assert.assertEquals(actual, expected);
+        } catch (Exception e) {
+            System.out.println(message);
+        }
+    }
+
+    public void assertIfElementsAreEqual(double actual, double expected, String... message) {
         try {
             Assert.assertEquals(actual, expected);
         } catch (Exception e) {

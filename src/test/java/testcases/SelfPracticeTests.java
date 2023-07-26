@@ -4,45 +4,59 @@ import org.testng.annotations.Test;
 
 public class SelfPracticeTests extends BaseTest {
     @Test
-    public void historyIsAvailableForLoggedInUsersOnlyTest() {
+    public void historyIsAvailableForLoggedInUsersOnlyTest_new() {
         homePage.clickCourseGalleryBtn();
-        courseGalleryPage.checkIfElementIsDisplayedOrNot(courseGalleryPage.getTheFirstCourseName(), true);
-        courseGalleryPage.assertElementIsNotPresent(courseGalleryPage.getHistoryBtn());
+        courseGalleryPage.checkThatCoursePageIsLoaded();
+        courseGalleryPage.checkThatHistoryButtonIsNotPresented();
         courseGalleryPage.navigationViaBrowserBack();
         homePage.clickSignInBtn();
         signInPage.fillInLoginForm("testing@my-fork.com", "Password");
         homePage.clickCourseGalleryBtn();
-        courseGalleryPage.checkIfElementIsDisplayedOrNot(courseGalleryPage.getTheFirstCourseName(), true);
-        courseGalleryPage.checkIfElementIsDisplayedOrNot(courseGalleryPage.getHistoryBtn(), true);
+        courseGalleryPage.checkThatCoursePageIsLoaded();
+        courseGalleryPage.checkThatHistoryButtonIsPresented();
         courseGalleryPage.navigationViaBrowserBack();
         homePage.clickSignOutBtn();
-        homePage.checkIfElementIsDisplayedOrNot(homePage.getCourseGalleryBtn(), true);
+        homePage.validationOfGalleryBtn();
     }
-
     @Test
     public void courseGalleryOptionsTest() {
         homePage.clickCourseGalleryBtn();
-        courseGalleryPage.assertActualAndExpectedList(
-                expectedExpertiseList(),
-                courseGalleryPage.getExpertiseList());
+        courseGalleryPage.checkExpertiseListIsCorrect();
     }
 
     @Test
-    public void quizProgressBarFunctionalityTest() {
+    public void quizProgressBarFunctionalityTest1() {
         homePage.clickCourseGalleryBtn();
-        assertEquality(courseGalleryPage.getNumOfQuestionsInStringFormat("Development", "SQL 101 (Basics)"),
-                "0 / 9");
-        courseGalleryPage.clickStartBtnInCourse("Development", "SQL 101 (Basics)");
+        courseGalleryPage.checkNumberOfQuestionsForTheFirstCourse();
+        courseGalleryPage.clickBtnStartOnTheFirstCourse();
         switchToWindow(1);
-        sql101BasicsPage.printQuestionName();
-        assertEquality(sql101BasicsPage.getQuestionNumber(), "1");
-        assertEquality(sql101BasicsPage.getProgressBarValue(), 0);
+        sql101BasicsPage.questionNameIsDisplayed();
+        sql101BasicsPage.checkThatWeGetQuestionNumberOne();
+        sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
         sql101BasicsPage.clickToAnswer(0);
-        assertEquality(sql101BasicsPage.getProgressBarValue(), 11);
+        sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
         sql101BasicsPage.clickNextBtn();
-        assertEquality(sql101BasicsPage.getQuestionNumber(), "2");
-        sql101BasicsPage.clickToAnswerOtherPages(0);
-        assertEquality(sql101BasicsPage.getProgressBarValue(), 22);
+        sql101BasicsPage.checkThatWeGetQuestionNumberTwo();
+        sql101BasicsPage.clickToTheFirstAnswer();
+        sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
     }
+
+    @Test
+    public void quizProgressBarFunctionalityTest2() {
+        homePage.clickCourseGalleryBtn();
+        courseGalleryPage.checkNumberOfQuestionsForTheSecondCourse();
+        courseGalleryPage.clickBtnStartOnTheSecondCourse();
+        switchToWindow(1);
+        sql101TestPage.questionNameIsDisplayed();
+        sql101TestPage.checkThatWeGetQuestionNumberOne();
+        sql101TestPage.verifyTheProgressBarValueForTheSecondCourse();
+        sql101TestPage.clickToAnswer(0);
+        sql101TestPage.verifyTheProgressBarValueForTheSecondCourse();
+        sql101TestPage.clickNextBtn();
+        sql101TestPage.checkThatWeGetQuestionNumberTwo();
+        sql101TestPage.clickToTheFirstAnswer();
+        sql101TestPage.verifyTheProgressBarValueForTheSecondCourse();
+    }
+
 
 }
