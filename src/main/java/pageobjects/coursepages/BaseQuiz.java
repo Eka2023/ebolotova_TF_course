@@ -44,11 +44,11 @@ public class BaseQuiz extends BaseMain {
         driver.findElement(questionName).isDisplayed();
     }
 
-    public void clickToAnswer(int answerId) {
-        driver.findElement(
-                        By.xpath("//div[@class='quiz-process-question-block-answers-block-item ' and @data-answer-id='" + answerId + "']"))
-                .click();
-    }
+//    public void clickToAnswer(int answerId) {
+//        driver.findElement(
+//                        By.xpath("//div[@class='quiz-process-question-block-answers-block-item ' and @data-answer-id='" + answerId + "']"))
+//                .click();
+//    }
 
     public WebElement getAnswer(int answerId) {
         return driver.findElement(
@@ -60,6 +60,10 @@ public class BaseQuiz extends BaseMain {
         getAnswer(0).click();
     }
 
+    public void clickToTheSecondAnswer() {
+        getAnswer(1).click();
+    }
+
     public double getProgressBarValue() {
         String pattern = "%";
         String value = driver.findElement(processProgressData).getText();
@@ -67,15 +71,23 @@ public class BaseQuiz extends BaseMain {
         return intValue;
     }
 
+    public double getExpectedProgressBarValue(double totalQNum){
+        return (getAnsweredQuestionsAmount()/totalQNum)*100;
+    }
+
     public void verifyTheProgressBarValueForTheFirstCourse(){
         double totalQNum = courseGalleryPage.getNumOfQuestionsInCourse("Development", "SQL 101 (Basics)");
-        double expectedValue = (getAnsweredQuestionsAmount()/totalQNum)*100;
-        assertIfElementsAreEqual(getProgressBarValue(), expectedValue);
+        double expectedValue = getExpectedProgressBarValue(totalQNum);
+        checkThatProgressBarValueIsAsExpected(expectedValue);
     }
 
     public void verifyTheProgressBarValueForTheSecondCourse(){
         double totalQNum = courseGalleryPage.getNumOfQuestionsInCourse("Development", "SQL 101 test");
-        double expectedValue = (getAnsweredQuestionsAmount()/totalQNum)*100;
+        double expectedValue = getExpectedProgressBarValue(totalQNum);
+        checkThatProgressBarValueIsAsExpected(expectedValue);
+    }
+
+    public void checkThatProgressBarValueIsAsExpected(double expectedValue){
         assertIfElementsAreEqual(getProgressBarValue(), expectedValue);
     }
 

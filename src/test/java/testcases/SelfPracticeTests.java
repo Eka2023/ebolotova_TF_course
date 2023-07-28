@@ -33,11 +33,11 @@ public class SelfPracticeTests extends BaseTest {
         sql101BasicsPage.questionNameIsDisplayed();
         sql101BasicsPage.checkThatWeGetQuestionNumberOne();
         sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
-        sql101BasicsPage.clickToAnswer(0);
+        sql101BasicsPage.clickToTheFirstAnswer();
         sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
         sql101BasicsPage.clickNextBtn();
         sql101BasicsPage.checkThatWeGetQuestionNumberTwo();
-        sql101BasicsPage.clickToTheFirstAnswer();
+        sql101BasicsPage.clickToTheSecondAnswer();
         sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
     }
 
@@ -50,7 +50,7 @@ public class SelfPracticeTests extends BaseTest {
         sql101TestPage.questionNameIsDisplayed();
         sql101TestPage.checkThatWeGetQuestionNumberOne();
         sql101TestPage.verifyTheProgressBarValueForTheSecondCourse();
-        sql101TestPage.clickToAnswer(0);
+        sql101TestPage.clickToTheSecondAnswer();
         sql101TestPage.verifyTheProgressBarValueForTheSecondCourse();
         sql101TestPage.clickNextBtn();
         sql101TestPage.checkThatWeGetQuestionNumberTwo();
