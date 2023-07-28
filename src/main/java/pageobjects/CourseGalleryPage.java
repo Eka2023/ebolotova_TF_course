@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,9 +50,13 @@ public class CourseGalleryPage extends BaseMain {
     }
 
     public void checkThatHistoryButtonIsNotPresented(){
-        checkElementIsNotPresent(getHistoryBtn());
+        Assert.assertTrue(checkElementIsNotPresent(getHistoryBtn()));
     }
 
+    public void checkThatHistoryButtonIsNotPresentedViaList(){
+        List<WebElement> list = driver.findElements(historyBtn);
+        Assert.assertTrue(list.isEmpty());
+    }
     public void checkThatHistoryButtonIsPresented() {
         checkIfElementIsDisplayedOrNot(getHistoryBtn(), true);
     }
@@ -79,8 +84,6 @@ public class CourseGalleryPage extends BaseMain {
         assertIfElementsAreEqual(getNumOfQuestionsInCourse("Development", "SQL 101 test"),
                 12);
     }
-
-
 
 
     //ExpectedData

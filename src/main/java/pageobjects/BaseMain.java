@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.FileAssert.fail;
@@ -34,12 +35,13 @@ public class BaseMain {
         Assert.assertEquals(driver.findElement(element).isDisplayed(), value);
     }
 
-    public void checkElementIsNotPresent(By element) {
+    public boolean checkElementIsNotPresent(By element) {
         try {
             driver.findElement(element);
             fail("Element is not presented");
+            return false;
         } catch (NoSuchElementException ex) {
-            /* do nothing, link is not present, assert is passed */
+            return true;
         }
     }
 
@@ -78,7 +80,10 @@ public class BaseMain {
     public void softAssertActualAndExpectedList(List<String> actual, List<String> expected) {
         softAssert.assertEquals(actual, expected);
     }
-
+    protected void switchToWindowFromBaseMain(int tab) {
+        List<String> tabHandler = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabHandler.get(tab));
+    }
     public void softAssertIfElementsAreEqual(String actual, String expected, String... message) {
         try {
             softAssert.assertEquals(actual, expected);

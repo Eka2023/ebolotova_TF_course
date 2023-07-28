@@ -27,8 +27,8 @@ public class DriverInteractions extends BaseTest {
         navigateToAnotherURL("http://amazon.com");
         openNewWindowTab();
         assertEquality(getQuantityOfOpenedTabs(), 4);
-        switchToWindow(0);
-        switchToWindow(2);
+        switchToWindowFromTestBase(0);
+        switchToWindowFromTestBase(2);
         assertEquality(getTitle(),"Amazon.com. Spend less. Smile more.");
 
     }

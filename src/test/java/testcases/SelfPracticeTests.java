@@ -8,6 +8,7 @@ public class SelfPracticeTests extends BaseTest {
         homePage.clickCourseGalleryBtn();
         courseGalleryPage.checkThatCoursePageIsLoaded();
         courseGalleryPage.checkThatHistoryButtonIsNotPresented();
+        //courseGalleryPage.checkThatHistoryButtonIsNotPresentedViaList(); //the second variant how to do it
         courseGalleryPage.navigationViaBrowserBack();
         homePage.clickSignInBtn();
         signInPage.fillInLoginForm("testing@my-fork.com", "Password");
@@ -24,39 +25,30 @@ public class SelfPracticeTests extends BaseTest {
         courseGalleryPage.checkExpertiseListIsCorrect();
     }
 
+
     @Test
-    public void quizProgressBarFunctionalityTest1() {
+    public void theFirstCourseQuizProgressBarFunctionalityTest(){
+        quizProgressBarFunctionalityTest("Development", "SQL 101 (Basics)");
+    }
+    @Test
+    public void theSecondCourseQuizProgressBarFunctionalityTest(){
+        quizProgressBarFunctionalityTest("Development", "SQL 101 test");
+    }
+
+    public void quizProgressBarFunctionalityTest(String exp, String course) {
         homePage.clickCourseGalleryBtn();
         courseGalleryPage.checkNumberOfQuestionsForTheFirstCourse();
         courseGalleryPage.clickBtnStartOnTheFirstCourse();
-        switchToWindow(1);
+        switchToWindowFromTestBase(1);
         sql101BasicsPage.questionNameIsDisplayed();
         sql101BasicsPage.checkThatWeGetQuestionNumberOne();
-        sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
-        sql101BasicsPage.clickToTheFirstAnswer();
-        sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
+        sql101BasicsPage.verifyTheProgressBarValueForACourse(exp, course);
+        sql101BasicsPage.clickToTheFirstQuestionAnswer();
+        sql101BasicsPage.verifyTheProgressBarValueForACourse(exp, course);
         sql101BasicsPage.clickNextBtn();
         sql101BasicsPage.checkThatWeGetQuestionNumberTwo();
-        sql101BasicsPage.clickToTheSecondAnswer();
-        sql101BasicsPage.verifyTheProgressBarValueForTheFirstCourse();
+        sql101BasicsPage.clickToTheAnotherQuestionsAnswer();
+        sql101BasicsPage.verifyTheProgressBarValueForACourse(exp, course);
     }
-
-    @Test
-    public void quizProgressBarFunctionalityTest2() {
-        homePage.clickCourseGalleryBtn();
-        courseGalleryPage.checkNumberOfQuestionsForTheSecondCourse();
-        courseGalleryPage.clickBtnStartOnTheSecondCourse();
-        switchToWindow(1);
-        sql101TestPage.questionNameIsDisplayed();
-        sql101TestPage.checkThatWeGetQuestionNumberOne();
-        sql101TestPage.verifyTheProgressBarValueForTheSecondCourse();
-        sql101TestPage.clickToTheSecondAnswer();
-        sql101TestPage.verifyTheProgressBarValueForTheSecondCourse();
-        sql101TestPage.clickNextBtn();
-        sql101TestPage.checkThatWeGetQuestionNumberTwo();
-        sql101TestPage.clickToTheFirstAnswer();
-        sql101TestPage.verifyTheProgressBarValueForTheSecondCourse();
-    }
-
 
 }

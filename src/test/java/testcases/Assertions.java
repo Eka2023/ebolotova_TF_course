@@ -18,8 +18,8 @@ public class Assertions extends BaseTest{
         signUpPage.assertIfElementsAreEqual(actualJobTitleListSize, expectedJobTitleListSize, "Size of the list is not correct");
         signUpPage.checkIfElementIsDisplayedOrNot(signUpPage.getOtherInfoBlock(), expectedDisplayed);
         signUpPage.assertActualAndExpectedList(
-                signUpPage.getJobListWithPreferableTitle("developers"),
-                expectedDevJobTitleList());
+                signUpPage.getJobListWithPreferableTitle("developer"),
+                expectedDevList);
     }
 
     @Test(groups = {"medium"})
@@ -36,7 +36,7 @@ public class Assertions extends BaseTest{
         signUpPage.softAssertIfElementIsDisplayed_boolean(signUpPage.getOtherInfoBlock(), expectedDisplayed);
         signUpPage.softAssertActualAndExpectedList(
                 signUpPage.getJobListWithPreferableTitle("developer"),
-                expectedDevJobTitleList());
+                expectedDevList);
         signUpPage.softAssertAll();
     }
 

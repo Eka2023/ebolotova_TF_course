@@ -46,7 +46,6 @@ public class BaseTest extends ExpectedData {
         sql101BasicsPage = new SQL101BasicsPage(driver);
         sql101TestPage = new SQL101TestPage(driver);
 
-
         /**
          *         This example slows down tests in two times:
          *         DevTools devTools = ((ChromeDriver) driver).getDevTools();
@@ -78,7 +77,7 @@ public class BaseTest extends ExpectedData {
         }
     }
 
-    protected void switchToWindow(int tab) {
+    protected void switchToWindowFromTestBase(int tab) {
         List<String> tabHandler = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabHandler.get(tab));
     }
