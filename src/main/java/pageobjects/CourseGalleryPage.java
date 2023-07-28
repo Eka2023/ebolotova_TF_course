@@ -32,7 +32,7 @@ public class CourseGalleryPage extends BaseMain {
         return expertiseListByName;
     }
 
-    public Integer getNumOfQuestions(String expertiseName, String courseName) {
+    public Integer getNumOfQuestionsInCourse(String expertiseName, String courseName) {
         By numOfQuestions = By.xpath("//span[contains(text(),'" + courseName + "')]/ancestor::div[@data-expertise-name= '" + expertiseName + "']//div[@class='quiz-item-questions-count']");
         String qstN = driver.findElement(numOfQuestions).getText();
         String amountOfQuestions = qstN.replaceAll("\\d+ \\/ ","");
@@ -63,7 +63,7 @@ public class CourseGalleryPage extends BaseMain {
     }
 
     public void checkNumberOfQuestionsForTheFirstCourse(){
-        assertIfElementsAreEqual(getNumOfQuestions("Development", "SQL 101 (Basics)"),
+        assertIfElementsAreEqual(getNumOfQuestionsInCourse("Development", "SQL 101 (Basics)"),
                 9);
     }
 
@@ -76,7 +76,7 @@ public class CourseGalleryPage extends BaseMain {
     }
 
     public void checkNumberOfQuestionsForTheSecondCourse(){
-        assertIfElementsAreEqual(getNumOfQuestions("Development", "SQL 101 test"),
+        assertIfElementsAreEqual(getNumOfQuestionsInCourse("Development", "SQL 101 test"),
                 12);
     }
 

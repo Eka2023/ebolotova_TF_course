@@ -9,10 +9,10 @@ import pageobjects.CourseGalleryPage;
 import java.util.List;
 
 public class BaseQuiz extends BaseMain {
+    CourseGalleryPage courseGalleryPage;
     By questionN = By.xpath("//div[@class='quiz-process-question-block-title']/span");
 
     By qstAmount = By.xpath("//div[@class='quiz-process-questions-button ']");
-
     By answeredQstAmount = By.xpath("//div[@class='quiz-process-questions-button answered']");
     By nextBtn = By.xpath("//div[@class='quiz-process-navigations-block-button-next ']");
     By questionName = By.xpath("//div[@class='quiz-process-question-block-task']");
@@ -68,12 +68,13 @@ public class BaseQuiz extends BaseMain {
     }
 
     public void verifyTheProgressBarValueForTheFirstCourse(){
-        double totalQNum = galleryPage.getNumOfQuestions("Development", "SQL 101 (Basics)");
+        double totalQNum = courseGalleryPage.getNumOfQuestionsInCourse("Development", "SQL 101 (Basics)");
         double expectedValue = (getAnsweredQuestionsAmount()/totalQNum)*100;
         assertIfElementsAreEqual(getProgressBarValue(), expectedValue);
     }
+
     public void verifyTheProgressBarValueForTheSecondCourse(){
-        double totalQNum = galleryPage.getNumOfQuestions("Development", "SQL 101 test");
+        double totalQNum = courseGalleryPage.getNumOfQuestionsInCourse("Development", "SQL 101 test");
         double expectedValue = (getAnsweredQuestionsAmount()/totalQNum)*100;
         assertIfElementsAreEqual(getProgressBarValue(), expectedValue);
     }
