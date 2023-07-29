@@ -13,8 +13,7 @@ import java.util.List;
 @Getter
 public class CourseGalleryPage extends BaseMain {
 
-    By theFirstCourseName = By.xpath("//span[contains(text(), 'SQL 101 (Basics)')]");
-
+    By coursePageTitle = By.xpath("//div[@class='quiz-section-title']");
     By historyBtn = By.xpath("//a[contains(text(), 'History')]");
     By expertiseList = By.xpath("//div[@class='expertise-areas-list']/div");
 
@@ -36,59 +35,54 @@ public class CourseGalleryPage extends BaseMain {
     public Integer getNumOfQuestionsInCourse(String expertiseName, String courseName) {
         By numOfQuestions = By.xpath("//span[contains(text(),'" + courseName + "')]/ancestor::div[@data-expertise-name= '" + expertiseName + "']//div[@class='quiz-item-questions-count']");
         String qstN = driver.findElement(numOfQuestions).getText();
-        String amountOfQuestions = qstN.replaceAll("\\d+ \\/ ","");
+        String amountOfQuestions = qstN.replaceAll("\\d+ \\/ ", "");
         return Integer.valueOf(amountOfQuestions);
     }
 
     public void clickStartBtnInCourse(String expertiseName, String courseName) {
         driver.findElement(By.xpath("//span[contains(text(),'" + courseName + "')]/ancestor::div[@data-expertise-name= '" + expertiseName + "']//div[contains(text(), 'Start')]")).click();
-
     }
 
-    public void checkThatCoursePageIsLoaded(){
-        checkIfElementIsDisplayedOrNot(getTheFirstCourseName(), true);
+    public void clickExpertiseName(String expertiseName) {
+        List<WebElement> list = driver.findElements(expertiseList);
+        for (WebElement element : list) {
+            if (expertiseName.equals(element.getText())) {
+                element.click();
+            }
+        }
     }
 
-    public void checkThatHistoryButtonIsNotPresented(){
+    public void checkThatCoursePageIsLoaded() {
+        checkElementIsDisplayed(getCoursePageTitle(), true);
+    }
+
+    public void checkThatHistoryButtonIsNotPresented() {
         Assert.assertTrue(checkElementIsNotPresent(getHistoryBtn()));
     }
 
-    public void checkThatHistoryButtonIsNotPresentedViaList(){
+    public void checkThatHistoryButtonIsNotPresentedViaList() {
         List<WebElement> list = driver.findElements(historyBtn);
         Assert.assertTrue(list.isEmpty());
     }
+
     public void checkThatHistoryButtonIsPresented() {
-        checkIfElementIsDisplayedOrNot(getHistoryBtn(), true);
+        checkElementIsDisplayed(getHistoryBtn(), true);
     }
 
-    public void checkExpertiseListIsCorrect(){
+    public void checkExpertiseListIsCorrect() {
         assertActualAndExpectedList(
                 expectedExpertiseList(),
                 getExpertiseList());
     }
 
-    public void checkNumberOfQuestionsForTheFirstCourse(){
-        assertIfElementsAreEqual(getNumOfQuestionsInCourse("Development", "SQL 101 (Basics)"),
-                9);
-    }
-
-    public void clickBtnStartOnTheFirstCourse(){
-        clickStartBtnInCourse("Development", "SQL 101 (Basics)");
-    }
-
-    public void clickBtnStartOnTheSecondCourse(){
-        clickStartBtnInCourse("Development", "SQL 101 test");
-    }
-
-    public void checkNumberOfQuestionsForTheSecondCourse(){
-        assertIfElementsAreEqual(getNumOfQuestionsInCourse("Development", "SQL 101 test"),
-                12);
+    public void checkNumberOfQuestionsForACourse(String expertiseName, String courseName, double expectedQuantity) {
+        assertIfElementsAreEqual(getNumOfQuestionsInCourse(expertiseName, courseName), expectedQuantity);
     }
 
 
     //ExpectedData
-    public List<String> expectedExpertiseList(){
-        List<String> expectedList = Arrays.asList( "Development", "Testing", "Business Analyst", "Agile", "Project Management");
+    public List<String> expectedExpertiseList() {
+        List<String> expectedList = Arrays.asList("Development", "Testing", "Business Analyst", "Agile", "Project Management");
         return expectedList;
 
     }

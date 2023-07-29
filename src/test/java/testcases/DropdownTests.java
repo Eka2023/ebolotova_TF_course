@@ -5,10 +5,9 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class DropdownTests extends BaseTest {
-
     @Test(priority = 1, groups = {"high"})
     public void allJobTitleListTest() {
-        dropDownTest(signUpPage.getJobTitleList(), expectedAllJobsList);
+        dropDownTest(signUpPage.getJobTitle(), expectedAllJobsList);
     }
 
     @Test(priority = 4, groups = {"medium"})
@@ -28,17 +27,21 @@ public class DropdownTests extends BaseTest {
 
     @Test(priority = 5, groups = {"low"})
     public void businessAnalystJobTitleListTest() {
-        dropDownTest(signUpPage.getJobListWithPreferableTitle("business"), expectedBusinessAnaluystList);
+        dropDownTest(signUpPage.getJobListWithPreferableTitle("business"), expectedBusinessAnalystList);
     }
 
     @Test(priority = 2, groups = {"high"})
     public void allJobTitleWithoutSeleniumSelectionTest() {
         dropDownTest(signUpPage.getJobTitleListWithoutSeleniumSelect(), expectedAllJobsList);
     }
-
     public void dropDownTest(List<String> actualList, List<String> expectedList) {
         homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(actualList, expectedList);
+    }
+    @Test
+    public void test22(){
+        homePage.clickSignUpBtn();
+        signUpPage.assertActualAndExpectedList(signUpPage.getJobTitle(), expectedAllJobsList);
     }
 
 }

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseTest extends ExpectedData {
-    WebDriver driver;
+    public WebDriver driver;
     HomePage homePage;
     SignInPage signInPage;
     SignUpPage signUpPage;
@@ -96,11 +96,6 @@ public class BaseTest extends ExpectedData {
     }
 
 
-    protected String getCurrentURL() {
-        return driver.getCurrentUrl();
-
-    }
-
     protected String getTitle() {
         return driver.getTitle();
     }
@@ -115,17 +110,13 @@ public class BaseTest extends ExpectedData {
 
     }
 
-    protected void assertEquality(String actual, String expected) {
-        Assert.assertEquals(actual, expected);
-    }
-
-    protected void assertEquality(double actual, double expected) {
-        Assert.assertEquals(actual, expected);
-    }
-
-    protected void assertEquality(int actual, int expected) {
-        Assert.assertEquals(actual, expected);
-    }
-
+//    protected void assertEquality(String actual, String expected) {
+//        Assert.assertEquals(actual, expected);
+//    }
+//
+//    protected void assertEquality(int actual, int expected) {
+//        Assert.assertEquals(actual, expected);
+//    }
+//
 
 }

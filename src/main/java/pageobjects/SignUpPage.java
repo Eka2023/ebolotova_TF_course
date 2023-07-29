@@ -10,8 +10,6 @@ import utils.ExpectedData;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.ExpectedData.*;
-
 @Getter
 public class SignUpPage extends BaseMain {
 
@@ -21,17 +19,17 @@ public class SignUpPage extends BaseMain {
         super(dr);
     }
 
-    By jobTitleList = By.id("job-title");
-    By jobTitle = By.xpath("//select[@id='job-title']//option");
+    By jobTitle = By.id("job-title");
+    By jobTitleListAll = By.xpath("//select[@id='job-title']//option");
 
     By otherInfoBlock = By.xpath("//div[contains(@class, 'other-info-block')]");
 
-    public String getPageTitle() {
-        return driver.getTitle();
-    }
 
-    public List<String> getJobTitleList() {
-        WebElement dropDownElement = driver.findElement(jobTitleList);
+    public void checkCurrentURL(){
+        assertIfElementsAreEqual(driver.getCurrentUrl(), "https://test.my-fork.com/login");
+    }
+    public List<String> getJobTitle() {
+        WebElement dropDownElement = driver.findElement(jobTitle);
         Select searchDropDown = new Select(dropDownElement);
         List<WebElement> list = searchDropDown.getOptions();
         List<String> resultList = new ArrayList<>();
@@ -42,7 +40,7 @@ public class SignUpPage extends BaseMain {
     }
 
     public List<String> getJobListWithPreferableTitle(String title) {
-        List<String> allTitleList = getJobTitleList();
+        List<String> allTitleList = getJobTitle();
         List<String> resultList = new ArrayList<>();
         for (int i = 0; i < allTitleList.size(); i++) {
             String tmp = allTitleList.get(i);
@@ -56,7 +54,7 @@ public class SignUpPage extends BaseMain {
     }
 
     public List<String> getJobListWithPreferableTitle(String title, String title1) {
-        List<String> allTitleList = getJobTitleList();
+        List<String> allTitleList = getJobTitle();
         List<String> resultList = new ArrayList<>();
         for (int i = 0; i < allTitleList.size() - 1; i++) {
             String tmp = allTitleList.get(i);
@@ -69,7 +67,7 @@ public class SignUpPage extends BaseMain {
     }
 
     public List<String> getJobTitleListWithoutSeleniumSelect() {
-        List<WebElement> elementsList = driver.findElements(jobTitle);
+        List<WebElement> elementsList = driver.findElements(jobTitleListAll);
         List<String> resultList = new ArrayList<>();
         for (int i = 0; i < elementsList.size() - 1; i++) {
             resultList.add(elementsList.get(i).getText());
@@ -77,5 +75,22 @@ public class SignUpPage extends BaseMain {
         }
         return resultList;
     }
+
+    public void checkTitle() {
+        assertIfElementsAreEqual(getPageTitle(), "Sign Up", "Title is not consistent");
+    }
+
+    public void checkJobTitleListSize(){
+        assertIfElementsAreEqual(getJobTitle().size(), expectedData.expectedAllJobsList.size(), "Size of the list is not correct");
+    }
+
+    public void checkThatOtherInfoBlockIsDisplayed(){
+        checkElementIsDisplayed(getOtherInfoBlock(),true);
+    }
+
+    public void checkDevTitleList(){
+        assertActualAndExpectedList(getJobListWithPreferableTitle("developer"), expectedData.expectedDevList);
+    }
+
 
 }

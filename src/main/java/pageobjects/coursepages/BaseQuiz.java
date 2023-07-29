@@ -38,7 +38,6 @@ public class BaseQuiz extends BaseMain {
 
     public int getAnsweredQuestionsAmount(){
         List<WebElement> list = driver.findElements(answeredQstAmount);
-        System.out.println("answered questions "+list.size());
         return list.size();
     }
 
@@ -68,14 +67,14 @@ public class BaseQuiz extends BaseMain {
         String pattern = "%";
         String value = driver.findElement(processProgressData).getText();
         double intValue = Integer.parseInt(value.replaceAll(pattern,""));
-        System.out.println("Actual value is "+intValue);
+        System.out.println("Actual value " + intValue);
         return intValue;
     }
 
     public double getExpectedProgressBarValue(double totalQNum){
-        return round(getAnsweredQuestionsAmount()/totalQNum)*100;
-    }
+        return Math.floor((getAnsweredQuestionsAmount()/totalQNum)*100);
 
+    }
 //    public void verifyTheProgressBarValueForTheFirstCourse(){
 //        double totalQNum = courseGalleryPage.getNumOfQuestionsInCourse("Development", "SQL 101 (Basics)");
 //        double expectedValue = getExpectedProgressBarValue(totalQNum);
@@ -85,11 +84,9 @@ public class BaseQuiz extends BaseMain {
     public void verifyTheProgressBarValueForACourse(String expertiseName, String courseName){
         switchToWindowFromBaseMain(0);
         double totalQNum = courseGalleryPage.getNumOfQuestionsInCourse(expertiseName, courseName);
-        System.out.println("Total Num " +totalQNum);
         switchToWindowFromBaseMain(1);
         double expectedValue = getExpectedProgressBarValue(totalQNum);
         checkThatProgressBarValueIsAsExpected(expectedValue);
-        System.out.println("Expected value is " +expectedValue);
     }
 
 //    public void verifyTheProgressBarValueForTheSecondCourse(){

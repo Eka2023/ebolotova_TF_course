@@ -7,11 +7,9 @@ public class LoginTests extends BaseTest{
     public void enteringWrongEmailTest() {
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithIncorrectEmail();
-        waitForVisibilityOf(signInPage.getErrorMessage(), 5);
-        signInPage.checkIfElementIsDisplayedOrNot(signInPage.getErrorMessage(), true);
-        signInPage.assertIfElementsAreEqual(
-                signInPage.elementGetText(signInPage.getErrorMessage()),
-                "Error: email is incorrect");
+        waitForVisibilityOf(signInPage.getErrorMessage(), 5); // how to re-write it?
+        signInPage.checkThatErrorMessageIsDisplayed();
+        signInPage.checkErrorMessageAboutIncorrectEmail();
     }
 
     @Test(priority = 3, groups = {"high"})
@@ -19,31 +17,17 @@ public class LoginTests extends BaseTest{
         homePage.clickSignInBtn();
         signInPage.fillTheSignFormWithEmptyPassword();
         //waitForVisibilityOf(signInPage.getErrorMessage(), 5);
-        signInPage.checkIfElementIsDisplayedOrNot(signInPage.getErrorMessage(), true);
-        signInPage.assertIfElementsAreEqual(
-                signInPage.elementGetText(signInPage.getErrorMessage()),
-                "Error: fields are empty");
+        signInPage.checkThatErrorMessageIsDisplayed();
+        signInPage.checkErrorMessageAboutEmptyField();
     }
 
-//    @Test(priority = 2, groups = {"high", "medium"})
-//    public void wrongCredentialsTest_updated() {
-//        homePage.clickSignInBtn();
-//        signInPage.fillTheSignFormWithCorrectData();
-//        //waitForVisibilityOf(signInPage.getErrorMessage(), 5);
-//        signInPage.checkIfElementIsDisplayedOrNot(signInPage.getErrorMessage(), true);
-//        signInPage.assertIfElementsAreEqual(
-//                signInPage.elementGetText(signInPage.getErrorMessage()),
-//                "Error: email is incorrect");
-//    }
 
-//    @Test(priority = 4, groups = {"the lowest"})
-//    public void wrongCredentialsTest() {
-//        homePage.clickSignInBtn();
-//        signInPage.fillTheSignFormWithCorrectData();
-//        //waitForVisibilityOf(signInPage.getErrorMessage(), 5);
-//        signInPage.checkIfElementIsDisplayedOrNot(signInPage.getErrorMessage(), true);
-//        signInPage.assertIfElementsAreEqual(
-//                signInPage.elementGetText(signInPage.getErrorMessage()),
-//                "Error: credentials you provided are incorrect. Please try again. ");
-//    }
+    @Test(priority = 4, groups = {"the lowest"})
+    public void wrongCredentialsTest() {
+        homePage.clickSignInBtn();
+        signInPage.fillTheSignFormWithCorrectData();
+        //waitForVisibilityOf(signInPage.getErrorMessage(), 5);
+        signInPage.checkThatErrorMessageIsDisplayed();
+        signInPage.checkErrorMessageAboutIncorrectCredentials(); // wrong error message taken!!!
+    }
 }

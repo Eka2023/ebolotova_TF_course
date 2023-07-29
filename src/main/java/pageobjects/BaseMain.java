@@ -24,6 +24,11 @@ public class BaseMain {
         driver.get(baseURL);
         return baseURL;
     }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
     public WebElement pageElement(By element) {
         return driver.findElement(element);
     }
@@ -31,7 +36,7 @@ public class BaseMain {
     public void navigationViaBrowserBack(){
         driver.navigate().back();
     }
-    public void checkIfElementIsDisplayedOrNot(By element, boolean value) {
+    public void checkElementIsDisplayed(By element, boolean value) {
         Assert.assertEquals(driver.findElement(element).isDisplayed(), value);
     }
 
@@ -69,12 +74,20 @@ public class BaseMain {
         }
     }
 
-    public void assertIfElementIsSelected(By element) {
+    public void assertIfElementsAreEqual(List<String> actual, List<String> expected, String... message) {
+        try {
+            Assert.assertEquals(actual, expected);
+        } catch (Exception e) {
+            System.out.println(message);
+        }
+    }
+
+    public void assertElementIsSelected(By element) {
         Assert.assertTrue(driver.findElement(element).isSelected());
     }
 
     public void assertActualAndExpectedList(List<String> actual, List<String> expected) {
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(actual, expected);
     }
 
     public void softAssertActualAndExpectedList(List<String> actual, List<String> expected) {

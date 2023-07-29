@@ -1,4 +1,4 @@
-package testcases;
+package testcases.outofbaseurl;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tests11 {
+public class InterviewExample {
 
         public WebDriver driver;
         By article = By.xpath("//body/article");
