@@ -1,10 +1,16 @@
 package testcases;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class DropdownTests extends BaseTest {
+
+    @BeforeMethod
+    public void clickSingInButton(){
+        homePage.clickSignUpBtn();
+    }
     @Test(priority = 1, groups = {"high"})
     public void allJobTitleListTest() {
         dropDownTest(signUpPage.getJobTitle(), expectedAllJobsList);
@@ -35,13 +41,8 @@ public class DropdownTests extends BaseTest {
         dropDownTest(signUpPage.getJobTitleListWithoutSeleniumSelect(), expectedAllJobsList);
     }
     public void dropDownTest(List<String> actualList, List<String> expectedList) {
-        homePage.clickSignUpBtn();
+        //homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(actualList, expectedList);
-    }
-    @Test
-    public void test22(){
-        homePage.clickSignUpBtn();
-        signUpPage.assertActualAndExpectedList(signUpPage.getJobTitle(), expectedAllJobsList);
     }
 
 }
