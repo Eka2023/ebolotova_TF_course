@@ -41,7 +41,6 @@ public class DropdownTests extends BaseTest {
         dropDownTest(signUpPage.getJobTitleListWithoutSeleniumSelect(), expectedAllJobsList);
     }
     public void dropDownTest(List<String> actualList, List<String> expectedList) {
-        //homePage.clickSignUpBtn();
         signUpPage.assertActualAndExpectedList(actualList, expectedList);
     }
 
