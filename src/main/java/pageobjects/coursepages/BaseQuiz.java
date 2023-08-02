@@ -7,11 +7,11 @@ import pageobjects.BaseMain;
 import pageobjects.CourseGalleryPage;
 
 import java.util.List;
-
-import static java.lang.Math.round;
+import java.util.logging.Logger;
 
 public class BaseQuiz extends BaseMain {
-    CourseGalleryPage courseGalleryPage = new CourseGalleryPage(driver);
+    protected Logger logger = Logger.getLogger(getClass().getName());
+    CourseGalleryPage courseGalleryPage = new CourseGalleryPage(driver, logger);
     By questionN = By.xpath("//div[@class='quiz-process-question-block-title']/span");
 
     By qstAmount = By.xpath("//div[@class='quiz-process-questions-button ']");
@@ -20,8 +20,8 @@ public class BaseQuiz extends BaseMain {
     By questionName = By.xpath("//div[@class='quiz-process-question-block-task']");
     By processProgressData = By.id("quiz-process-progress-data");
 
-    public BaseQuiz(WebDriver dr) {
-        super(dr);
+    public BaseQuiz(WebDriver dr, Logger log) {
+        super(dr, log);
     }
 
     public String getQuestionNumber() {
@@ -29,11 +29,11 @@ public class BaseQuiz extends BaseMain {
     }
 
     public void checkThatWeGetQuestionNumberOne(){
-        assertIfElementsAreEqual(getQuestionNumber(), "1");
+        validateWithAssertEqual(getQuestionNumber(), "1");
     }
 
     public void checkThatWeGetQuestionNumberTwo(){
-        assertIfElementsAreEqual(getQuestionNumber(), "2");
+        validateWithAssertEqual(getQuestionNumber(), "2");
     }
 
     public int getAnsweredQuestionsAmount(){
@@ -56,11 +56,13 @@ public class BaseQuiz extends BaseMain {
     }
 
     public void clickToTheFirstQuestionAnswer() {
-        getAnswerForTheFirstQuestion(0).click();
+        clickElement(getAnswerForTheFirstQuestion(0), "AnswerForTheFirstQuestion");
+        //getAnswerForTheFirstQuestion(0).click();
     }
 
     public void clickToTheAnotherQuestionsAnswer() {
-        getAnswerForTheAnotherQuestions(1).click();
+        clickElement(getAnswerForTheAnotherQuestions(1), "AnswerForAnotherQuestions");
+        //getAnswerForTheAnotherQuestions(1).click();
     }
 
     public double getProgressBarValue() {
@@ -96,11 +98,11 @@ public class BaseQuiz extends BaseMain {
 //    }
 
     public void checkThatProgressBarValueIsAsExpected(double expectedValue){
-        assertIfElementsAreEqual(getProgressBarValue(), expectedValue);
+        validateWithAssertEqual(getProgressBarValue(), expectedValue);
     }
 
     public void clickNextBtn() {
-        driver.findElement(nextBtn).click();
+        clickElement(nextBtn, "NextBtn");
     }
 
 }

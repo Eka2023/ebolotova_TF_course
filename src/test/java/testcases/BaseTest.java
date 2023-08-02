@@ -1,28 +1,34 @@
 package testcases;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pageobjects.CourseGalleryPage;
-import pageobjects.HomePage;
-import pageobjects.SignInPage;
-import pageobjects.SignUpPage;
+import org.testng.annotations.BeforeSuite;
+import pageobjects.*;
 import pageobjects.coursepages.SQL101BasicsPage;
 import pageobjects.coursepages.SQL101TestPage;
 import utils.ExpectedData;
 
+
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class BaseTest extends ExpectedData {
     public WebDriver driver;
+    //Logger log;
+    Logger log = Logger.getLogger(getClass().getName());
+    BaseMain baseMain;
     HomePage homePage;
     SignInPage signInPage;
     SignUpPage signUpPage;
@@ -30,21 +36,30 @@ public class BaseTest extends ExpectedData {
     SQL101BasicsPage sql101BasicsPage;
     SQL101TestPage sql101TestPage;
 
+    @BeforeSuite
+    public void createLog() throws IOException {
+        saveLogs(log);
+    }
     @BeforeMethod(groups = {"high"})
-    public void openDriver() {
+    public void openDriver() throws IOException {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        //options.addArguments("--headless");
+        //WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        homePage = new HomePage(driver);
+        //log = Logger.getLogger(getClass().getName());
+        //saveLogs(log);
+        baseMain = new BaseMain(driver, log);
+        homePage = new HomePage(driver, log);
         homePage.getBaseURL();
-        signInPage = new SignInPage(driver);
-        signUpPage = new SignUpPage(driver);
-        courseGalleryPage = new CourseGalleryPage(driver);
-        sql101BasicsPage = new SQL101BasicsPage(driver);
-        sql101TestPage = new SQL101TestPage(driver);
+        signInPage = new SignInPage(driver, log);
+        signUpPage = new SignUpPage(driver, log);
+        courseGalleryPage = new CourseGalleryPage(driver, log);
+        sql101BasicsPage = new SQL101BasicsPage(driver, log);
+        sql101TestPage = new SQL101TestPage(driver, log);
 
         /**
          *         This example slows down tests in two times:
@@ -109,14 +124,12 @@ public class BaseTest extends ExpectedData {
         js.executeScript("window.scrollBy(0," + pixels + ")", "");
 
     }
-
-//    protected void assertEquality(String actual, String expected) {
-//        Assert.assertEquals(actual, expected);
-//    }
-//
-//    protected void assertEquality(int actual, int expected) {
-//        Assert.assertEquals(actual, expected);
-//    }
-//
+    private void saveLogs(Logger log) throws IOException {
+        FileHandler fileHandler = new FileHandler("/Users/ekaterinabolotova/IdeaProjects/ebolotova_TF_course/Logs.log");
+        log.addHandler(fileHandler);
+        SimpleFormatter formatter = new SimpleFormatter();
+        fileHandler.setFormatter(formatter);
+        log.info("This is the beginning of Test Suit");
+    }
 
 }

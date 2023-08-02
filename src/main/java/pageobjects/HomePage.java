@@ -4,41 +4,44 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.logging.Logger;
+
 @Getter
 public class HomePage extends BaseMain {
-    public HomePage(WebDriver dr) {
-        super(dr);
+    public HomePage(WebDriver dr, Logger log) {
+        super(dr, log);
     }
     By signUpButton = By.xpath("//a[@data='record-data' and contains(@href, 'register')]");
     By signInButton = By.xpath("//a[contains(@href, 'login')]");
     By signOutBtn = By.xpath("//a[contains(@href, 'logout')]");
-    //By courseGalleryBtn = By.xpath("//a[@class='menu-item']/div[contains(text(), 'Course Gallery')]");
     By courseGalleryBtn = By.xpath("//div[contains(text(), 'Course Gallery')]");
 
     public void clickSignInBtn() {
-        driver.findElement(signInButton).click();
+        clickElement(signInButton, "SignInBtn");
     }
 
     public void clickSignUpBtn() {
-        driver.findElement(signUpButton).click();
+        clickElement(signUpButton, "SignUpBtn");
     }
 
     public void clickSignOutBtn() {
-        driver.findElement(signOutBtn).click();
+        clickElement(signOutBtn, "SignOutBtn");
     }
 
     public void clickCourseGalleryBtn() {
-        driver.findElement(courseGalleryBtn).click();
+        clickElement(courseGalleryBtn, "CourseGalleryBtn");
     }
 
-    public void validationOfGalleryBtn(){
-        checkElementIsDisplayed(getCourseGalleryBtn(), true);
+    public void validationOfGalleryBtn() {
+        checkElementIsDisplayed(getCourseGalleryBtn(), "CourseGalleryBtn", true);
     }
-    public void checkSignInBtnIsDisplayed(){
-        checkElementIsDisplayed(getSignInButton(), true);
+
+    public void checkSignInBtnIsDisplayed() {
+        checkElementIsDisplayed(getSignInButton(), "SignInBtn", true);
     }
+
     public void checkSignUpBtnIsDisplayed() {
-        checkElementIsDisplayed(getSignUpButton(), true);
+        checkElementIsDisplayed(getSignUpButton(), "SingUpBtn", true);
     }
 
 

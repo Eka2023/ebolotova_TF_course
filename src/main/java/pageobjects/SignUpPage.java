@@ -9,14 +9,14 @@ import utils.ExpectedData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Getter
 public class SignUpPage extends BaseMain {
-
     ExpectedData expectedData;
 
-    public SignUpPage(WebDriver dr) {
-        super(dr);
+    public SignUpPage(WebDriver dr, Logger log) {
+        super(dr, log);
     }
 
     By jobTitle = By.id("job-title");
@@ -26,7 +26,7 @@ public class SignUpPage extends BaseMain {
 
 
     public void checkCurrentURL(){
-        assertIfElementsAreEqual(driver.getCurrentUrl(), "https://test.my-fork.com/login");
+        validateWithAssertEqual(driver.getCurrentUrl(), "https://test.my-fork.com/login");
     }
     public List<String> getJobTitle() {
         WebElement dropDownElement = driver.findElement(jobTitle);
@@ -77,19 +77,19 @@ public class SignUpPage extends BaseMain {
     }
 
     public void checkTitle() {
-        assertIfElementsAreEqual(getPageTitle(), "Sign Up", "Title is not consistent");
+        validateWithAssertEqual(getPageTitle(), "Sign Up", "Title is not consistent");
     }
 
     public void checkJobTitleListSize(){
-        assertIfElementsAreEqual(getJobTitle().size(), expectedData.expectedAllJobsList.size(), "Size of the list is not correct");
+        validateWithAssertEqual(getJobTitle().size(), expectedData.expectedAllJobsList.size(), "Size of the list is not correct");
     }
 
     public void checkThatOtherInfoBlockIsDisplayed(){
-        checkElementIsDisplayed(getOtherInfoBlock(),true);
+        checkElementIsDisplayed(getOtherInfoBlock(),"OtherInfoBlock",true);
     }
 
     public void checkDevTitleList(){
-        assertActualAndExpectedList(getJobListWithPreferableTitle("developer"), expectedData.expectedDevList);
+        validateWithAssertEqual(getJobListWithPreferableTitle("developer"), expectedData.expectedDevList);
     }
 
 

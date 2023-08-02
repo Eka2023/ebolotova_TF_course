@@ -9,6 +9,7 @@ import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Getter
 public class CourseGalleryPage extends BaseMain {
@@ -17,8 +18,8 @@ public class CourseGalleryPage extends BaseMain {
     By historyBtn = By.xpath("//a[contains(text(), 'History')]");
     By expertiseList = By.xpath("//div[@class='expertise-areas-list']/div");
 
-    public CourseGalleryPage(WebDriver dr) {
-        super(dr);
+    public CourseGalleryPage(WebDriver dr, Logger log) {
+        super(dr, log);
     }
 
     public List<String> getExpertiseList() {
@@ -40,20 +41,21 @@ public class CourseGalleryPage extends BaseMain {
     }
 
     public void clickStartBtnInCourse(String expertiseName, String courseName) {
-        driver.findElement(By.xpath("//span[contains(text(),'" + courseName + "')]/ancestor::div[@data-expertise-name= '" + expertiseName + "']//div[contains(text(), 'Start')]")).click();
+        clickElement(By.xpath("//span[contains(text(),'" + courseName + "')]/ancestor::div[@data-expertise-name= '" + expertiseName + "']//div[contains(text(), 'Start')]"), "StartBtnInCourse");
     }
 
     public void clickExpertiseName(String expertiseName) {
         List<WebElement> list = driver.findElements(expertiseList);
         for (WebElement element : list) {
             if (expertiseName.equals(element.getText())) {
-                element.click();
+                clickElement(element, "ExpertiseName");
+                //element.click();
             }
         }
     }
 
     public void checkThatCoursePageIsLoaded() {
-        checkElementIsDisplayed(getCoursePageTitle(), true);
+        checkElementIsDisplayed(getCoursePageTitle(), "CoursePageTitle",true);
     }
 
     public void checkThatHistoryButtonIsNotPresented() {
@@ -66,17 +68,17 @@ public class CourseGalleryPage extends BaseMain {
     }
 
     public void checkThatHistoryButtonIsPresented() {
-        checkElementIsDisplayed(getHistoryBtn(), true);
+        checkElementIsDisplayed(getHistoryBtn(), "HistoryBtn",true);
     }
 
     public void checkExpertiseListIsCorrect() {
-        assertActualAndExpectedList(
+        validateWithAssertEqual(
                 expectedExpertiseList(),
                 getExpertiseList());
     }
 
     public void checkNumberOfQuestionsForACourse(String expertiseName, String courseName, double expectedQuantity) {
-        assertIfElementsAreEqual(getNumOfQuestionsInCourse(expertiseName, courseName), expectedQuantity);
+        validateWithAssertEqual(getNumOfQuestionsInCourse(expertiseName, courseName), expectedQuantity);
     }
 
 

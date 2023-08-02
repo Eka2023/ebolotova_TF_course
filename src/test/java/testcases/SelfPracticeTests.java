@@ -2,6 +2,8 @@ package testcases;
 
 import org.testng.annotations.Test;
 
+import java.util.logging.Logger;
+
 public class SelfPracticeTests extends BaseTest {
     @Test
     public void historyIsAvailableForLoggedInUsersOnlyTest_new() {
@@ -24,7 +26,6 @@ public class SelfPracticeTests extends BaseTest {
         homePage.clickCourseGalleryBtn();
         courseGalleryPage.checkExpertiseListIsCorrect();
     }
-
 
     @Test
     public void theFirstCourseQuizProgressBarFunctionalityTest(){

@@ -1,14 +1,14 @@
 package pageobjects.coursepages;
 
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-@Getter
+import java.util.logging.Logger;
+
 public class SQL101BasicsPage extends BaseQuiz {
 
-    public SQL101BasicsPage(WebDriver dr) {
-        super(dr);
+    public SQL101BasicsPage(WebDriver dr, Logger log) {
+        super(dr, log);
     }
 
 

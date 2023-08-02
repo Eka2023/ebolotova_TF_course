@@ -5,9 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.TestUserData;
 
+import java.util.logging.Logger;
+
 @Getter
 public class SignInPage extends BaseMain {
-
     TestUserData userData;
 
     By emailInputField = By.xpath("//input[@id='email']");
@@ -17,72 +18,83 @@ public class SignInPage extends BaseMain {
 
     By errorMessage = By.xpath("//p[contains(text(), 'Error') and @class  = '']");
 
-    public SignInPage(WebDriver dr) {
-        super(dr);
+    public SignInPage(WebDriver dr, Logger log) {
+        super(dr, log);
     }
 
-    public void checkCurrentURL(){
-        assertIfElementsAreEqual(driver.getCurrentUrl(), "https://test.my-fork.com/login");
-    }
-
-    public void fillInLoginForm(String name, String password){
-        driver.findElement(emailInputField).sendKeys(name);
-        driver.findElement(passwordInputField).sendKeys(password);
-        driver.findElement(loginButton).click();
+    public void fillInLoginForm(String name, String password, String... message) {
+        typeInformation(emailInputField, "Email Input Field", name);
+        typeInformation(passwordInputField, "Password Input Field", password);
+        clickElement(loginButton, "Login Btn");
     }
 
     public void fillTheSignFormWithIncorrectEmail() {
-        driver.findElement(emailInputField).sendKeys(userData.incorrectEmail);
-        driver.findElement(passwordInputField).sendKeys(userData.correctPassword);
-        driver.findElement(loginButton).click();
+        typeInformation(emailInputField, "Email Input Field", userData.incorrectEmail);
+        typeInformation(passwordInputField, "Password Input Field", userData.correctPassword);
+        clickElement(loginButton, "Login Btn");
     }
 
     public void fillTheSignFormWithCorrectData() {
-        driver.findElement(emailInputField).sendKeys(userData.correctEmail);
-        driver.findElement(passwordInputField).sendKeys(userData.correctPassword);
-        driver.findElement(loginButton).click();
+        typeInformation(emailInputField, "Email Input Field", userData.correctEmail);
+        typeInformation(passwordInputField, "Password Input Field", userData.correctPassword);
+        clickElement(loginButton, "Login Btn");
     }
 
     public void fillTheSignFormWithEmptyPassword() {
-        driver.findElement(emailInputField).sendKeys(userData.correctEmail);
-        driver.findElement(passwordInputField).sendKeys(userData.emptyPassword);
-        driver.findElement(loginButton).click();
+        typeInformation(emailInputField, "Email Input Field", userData.correctEmail);
+        typeInformation(passwordInputField, "Password Input Field", userData.emptyPassword);
+        clickElement(loginButton, "Login Btn");
     }
+
+
+    public void checkCurrentURL() {
+        validateWithAssertEqual(driver.getCurrentUrl(), "https://test.my-fork.com/login");
+    }
+
 
     public String elementGetText(By element) {
         return pageElement(element).getText();
     }
 
     public void checkTitle() {
-        assertIfElementsAreEqual(getPageTitle(), "Sign in", "Title is not consistent");
-    }
-    public void checkEmailInputIsDisplayed(){
-        checkElementIsDisplayed(getEmailInputField(), true);
-    }
-    public void checkPasswordInputIsDisplayed(){
-        checkElementIsDisplayed(getPasswordInputField(), true);
+        validateWithAssertEqual(getPageTitle(), "Sign in", "Title is not consistent");
     }
 
-    public void checkLoginInputIsDisplayed(){
-        checkElementIsDisplayed(getLoginButton(), true);
+    public void checkEmailInputIsDisplayed() {
+        checkElementIsDisplayed(getEmailInputField(), "EmailInput", true);
+    }
+
+    public void checkPasswordInputIsDisplayed() {
+        checkElementIsDisplayed(getPasswordInputField(), "PasswordInput", true);
+    }
+
+    public void checkLoginInputIsDisplayed() {
+        checkElementIsDisplayed(getLoginButton(), "LoginBtn", true);
     }
 
     public void checkThatCheckBoxRememberMeIsSelected() {
-        assertElementIsSelected(getCheckBoxRememberMe());
+        assertElementIsSelected(getCheckBoxRememberMe(), "RememberMeCheckBox");
 
     }
+
     public void checkThatErrorMessageIsDisplayed() {
-        checkElementIsDisplayed(getErrorMessage(), true);
+        checkElementIsDisplayed(getErrorMessage(), "ErrorMessage", true);
     }
-    public void checkErrorMessageAboutIncorrectEmail(){
-        assertIfElementsAreEqual(elementGetText(getErrorMessage()), "Error: email is incorrect");
+
+    public void checkErrorMessageAboutIncorrectEmail() {
+        validateWithAssertEqual(elementGetText(getErrorMessage()), "Error: email is incorrect");
     }
+
     public void checkErrorMessageAboutEmptyField() {
-        assertIfElementsAreEqual(elementGetText(getErrorMessage()), "Error: fields are empty");
+        validateWithAssertEqual(elementGetText(getErrorMessage()), "Error: fields are empty");
+    }
+
+    public void getErrorMessageText() {
+        elementGetText(getErrorMessage());
     }
 
     public void checkErrorMessageAboutIncorrectCredentials() {
-        assertIfElementsAreEqual(elementGetText(getErrorMessage()), "Error: credentials you provided are incorrect. Please try again. ");
+        validateWithAssertEqual(elementGetText(getErrorMessage()), "Error: credentials you provided are incorrect. Please try again. ");
     }
 
 
