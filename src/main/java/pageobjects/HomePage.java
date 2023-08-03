@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Getter
@@ -44,5 +45,8 @@ public class HomePage extends BaseMain {
         checkElementIsDisplayed(getSignUpButton(), "SingUpBtn", true);
     }
 
+    public List<Integer> urlVerification(){
+        return verifyLinkActive();
+    }
 
 }
