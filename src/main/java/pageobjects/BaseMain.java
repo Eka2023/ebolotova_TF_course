@@ -65,6 +65,10 @@ public class BaseMain {
         logger.info("Element " + elementName + " was successfully clicked");
     }
 
+    public Logger getLogger() {
+        return logger;
+    }
+
     public void typeInformation(By element, String elementName, String text) {
         driver.findElement(element).sendKeys(text);
         logger.info("Text in " + elementName + " was successfully entered");

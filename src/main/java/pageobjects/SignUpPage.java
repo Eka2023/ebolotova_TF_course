@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 @Getter
 public class SignUpPage extends BaseMain {
     ExpectedData expectedData;
+    Logger log = Logger.getLogger(getClass().getName());
 
     public SignUpPage(WebDriver dr, Logger log) {
         super(dr, log);

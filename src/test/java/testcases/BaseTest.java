@@ -7,9 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 import pageobjects.*;
 import pageobjects.coursepages.SQL101BasicsPage;
 import pageobjects.coursepages.SQL101TestPage;
@@ -36,7 +34,7 @@ public class BaseTest extends ExpectedData {
     SQL101BasicsPage sql101BasicsPage;
     SQL101TestPage sql101TestPage;
 
-    @BeforeSuite
+    @BeforeTest
     public void createLog() throws IOException {
         saveLogs(log);
     }
@@ -50,8 +48,8 @@ public class BaseTest extends ExpectedData {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        //log = Logger.getLogger(getClass().getName());
-        //saveLogs(log);
+//        log = Logger.getLogger(getClass().getName());
+//        saveLogs(log);
         baseMain = new BaseMain(driver, log);
         homePage = new HomePage(driver, log);
         homePage.getBaseURL();

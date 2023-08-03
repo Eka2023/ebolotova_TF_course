@@ -14,17 +14,17 @@
         <classes>
             <class name="testcases.Assertions">
                 <methods>
-                    <exclude name="softAssertions"></exclude>
-                    <exclude name="hardAssertions"></exclude>
+                    <include name="softAssertions"></include>
+                    <include name="hardAssertions"></include>
                 </methods>
             </class>
             <class name="testcases.ValidationTests"></class>
             <class name="testcases.DriverInteractions">
                 <methods>
-                    <exclude name="testCurrentUrl"></exclude>
-                    <exclude name="testTitle"></exclude>
-                    <exclude name="testOpenedTab"></exclude>
-                    <exclude name="testJSscroll"></exclude>
+                    <include name="testCurrentUrl"></include>
+                    <include name="testTitle"></include>
+                    <include name="testOpenedTab"></include>
+                    <include name="testJSscroll"></include>
                 </methods>
             </class>
             <class name="testcases.DropdownTests"></class>
