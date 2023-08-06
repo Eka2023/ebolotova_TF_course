@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static utils.ExpectedData.expectedActiveLinksOnHomePage;
+
 @Getter
 public class HomePage extends BaseMain {
     public HomePage(WebDriver dr, Logger log) {
@@ -45,8 +47,8 @@ public class HomePage extends BaseMain {
         checkElementIsDisplayed(getSignUpButton(), "SingUpBtn", true);
     }
 
-    public List<Integer> urlVerification(){
-        return verifyLinkActive();
+    public void urlHomePageVerification(){
+        softAssertActualAndExpectedList(getURLsFromLinkElements(), expectedActiveLinksOnHomePage);
     }
 
 }

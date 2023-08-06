@@ -5,7 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.TestUserData;
 
+import java.util.List;
 import java.util.logging.Logger;
+
+import static utils.ExpectedData.expectedActiveLinksOnHomePage;
+import static utils.ExpectedData.expectedActiveLinksOnSignInPage;
 
 @Getter
 public class SignInPage extends BaseMain {
@@ -95,6 +99,10 @@ public class SignInPage extends BaseMain {
 
     public void checkErrorMessageAboutIncorrectCredentials() {
         validateWithAssertEqual(elementGetText(getErrorMessage()), "Error: credentials you provided are incorrect. Please try again. ");
+    }
+
+    public void urlSignInPageVerification(){
+        softAssertActualAndExpectedList(getURLsFromLinkElements(), expectedActiveLinksOnSignInPage);
     }
 
 

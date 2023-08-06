@@ -20,7 +20,7 @@ public class Assertions extends BaseTest {
         signUpPage.checkJobTitleListSize();
         signUpPage.checkThatOtherInfoBlockIsDisplayed();
         signUpPage.checkDevTitleList();
-        signUpPage.softAssertAll();
+        //signUpPage.softAssertAll();
     }
 
 }

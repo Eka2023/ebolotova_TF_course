@@ -5,18 +5,16 @@ import org.testng.annotations.Test;
 public class LinkVerificationTests extends BaseTest{
 
     @Test
-    public void verifyHomePageLinksListAndListSize(){
+    public void verifyHomePageLinks(){
         homePage.getBaseURL();
-        homePage.urlVerification();
-        homePage.validateWithAssertEqual(homePage.urlVerification().size(), 6);
+        homePage.urlHomePageVerification();
     }
 
     @Test
     public void verifySignInPageLinksListAndListSize(){
         homePage.getBaseURL();
         homePage.clickSignInBtn();
-        signInPage.verifyLinkActive();
-        signInPage.validateWithAssertEqual(signInPage.verifyLinkActive().size(), 5);
+        signInPage.urlSignInPageVerification();
     }
 
     @Test

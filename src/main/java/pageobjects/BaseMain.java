@@ -132,6 +132,7 @@ public class BaseMain {
 
     public void softAssertActualAndExpectedList(List<String> actual, List<String> expected) {
         softAssert.assertEquals(actual, expected);
+        softAssert.assertAll();
         logger.info("Soft assert for Lists is passed");
     }
 
@@ -144,6 +145,7 @@ public class BaseMain {
     public void softAssertIfElementsAreEqual(String actual, String expected, String... message) {
         try {
             softAssert.assertEquals(actual, expected);
+            softAssert.assertAll();
             logger.info("Soft assert for Strings is passed");
         } catch (Exception e) {
             System.out.println(message.toString());
@@ -153,6 +155,7 @@ public class BaseMain {
     public void softAssertIfElementsAreEqual(int actual, int expected, String... message) {
         try {
             softAssert.assertEquals(actual, expected);
+            softAssert.assertAll();
             logger.info("Soft assert for Integers is passed");
         } catch (Exception e) {
             System.out.println(message.toString());
@@ -161,26 +164,24 @@ public class BaseMain {
 
     public void softAssertIfElementIsDisplayed_boolean(By element, String elementName, boolean value) {
         softAssert.assertEquals(driver.findElement(element).isDisplayed(), value);
+        softAssert.assertAll();
         logger.info("Soft assert. Element"+elementName +" is displayed");
     }
 
-    public void softAssertAll() {
-        softAssert.assertAll();
-        logger.info("Soft assert All");
-    }
 
-
-    public List<Integer> verifyLinkActive(){
-
-        List<WebElement> linkElements = driver.findElements(By.xpath("//a")); //collect all links from page
-        List<String> collectedURLs = new ArrayList<>(); //this List will have actual URLs
-        List<Integer> codes = new ArrayList<>(); //this List will have codes that each URL will return
-        int resultCode; //initialize variable for a resulting code value and providing default value
-
-        for (WebElement linkElement: linkElements){ //this loop takes each element from LinkElements and takes href attribute (since each item is a link it will have it)
+    public List<String> getURLsFromLinkElements() {
+        List<WebElement> linkElements = driver.findElements(By.xpath("//a[@href]"));
+        //List<WebElement> linkElements = driver.findElements(By.xpath("//a")); //collect all links from page
+        List<String> collectedURLs = new ArrayList<>();
+        for (WebElement linkElement : linkElements) { //this loop takes each element from LinkElements and takes href attribute (since each item is a link it will have it)
             collectedURLs.add(linkElement.getAttribute("href"));
         }
+        return collectedURLs;
+    }
 
+    public List<Integer> verifyLinkActive(){
+        List<Integer> codes = new ArrayList<>(); //this List will have codes that each URL will return
+        List<String> collectedURLs = getURLsFromLinkElements(); //this List will have actual URLs
         for(String collectedURL: collectedURLs) { // this loop will execute actions below to fill up codes List with actual values
             System.out.println("Starting verification of " + collectedURL);
             try { //making sure that exception won't fail the execution to carry execution on
@@ -188,7 +189,7 @@ public class BaseMain {
                 HttpURLConnection httpURLConnect = (HttpURLConnection) url.openConnection(); //initialize HTTP Connection
                 httpURLConnect.setConnectTimeout(3000); //set timeout value
                 httpURLConnect.connect(); //establish connection to provided URL to execute a call
-                resultCode = httpURLConnect.getResponseCode(); //providing actual value into a value of a variable to be returned
+                int resultCode = httpURLConnect.getResponseCode(); //providing actual value into a value of a variable to be returned
                 System.out.println(resultCode);
                 codes.add(resultCode); //writing the result in resultCode array to return it
             } catch (Exception e) {
@@ -199,6 +200,6 @@ public class BaseMain {
         return codes; //a return of a list with codes for further verification
     }
 
-
-
 }
+
+
