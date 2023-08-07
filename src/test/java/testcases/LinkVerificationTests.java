@@ -8,6 +8,7 @@ public class LinkVerificationTests extends BaseTest{
     public void verifyHomePageLinks(){
         homePage.getBaseURL();
         homePage.urlHomePageVerification();
+        homePage.urlCodesHomePageVerification();
     }
 
     @Test
@@ -15,14 +16,15 @@ public class LinkVerificationTests extends BaseTest{
         homePage.getBaseURL();
         homePage.clickSignInBtn();
         signInPage.urlSignInPageVerification();
+        signInPage.urlCodesSignInPageVerification();
     }
 
     @Test
     public void verifyGalleryPageLinksListAndListSize(){
         homePage.getBaseURL();
         homePage.clickCourseGalleryBtn();
-        courseGalleryPage.verifyLinkActive();
-        courseGalleryPage.validateWithAssertEqual(courseGalleryPage.verifyLinkActive().size(), 13);
+        courseGalleryPage.urlCourseGalleryVerification();
+        courseGalleryPage.urlCodesCourseGalleryPageVerification();
     }
 
 }

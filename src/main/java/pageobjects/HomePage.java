@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static utils.ExpectedData.expectedActiveLinksOnHomePage;
+import static utils.ExpectedData.expectedCodesOfActiveLinksOnHomePage;
 
 @Getter
 public class HomePage extends BaseMain {
@@ -51,4 +52,7 @@ public class HomePage extends BaseMain {
         softAssertActualAndExpectedList(getURLsFromLinkElements(), expectedActiveLinksOnHomePage);
     }
 
+    public void urlCodesHomePageVerification(){
+        softAssertActualAndExpectedListInt(verifyLinkActive(), expectedCodesOfActiveLinksOnHomePage);
+    }
 }

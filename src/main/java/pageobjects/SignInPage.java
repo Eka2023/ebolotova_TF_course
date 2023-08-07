@@ -3,17 +3,14 @@ package pageobjects;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import utils.TestUserData;
 
-import java.util.List;
 import java.util.logging.Logger;
 
-import static utils.ExpectedData.expectedActiveLinksOnHomePage;
-import static utils.ExpectedData.expectedActiveLinksOnSignInPage;
+import static utils.ExpectedData.*;
+import static utils.TestUserData.*;
 
 @Getter
 public class SignInPage extends BaseMain {
-    TestUserData userData;
 
     By emailInputField = By.xpath("//input[@id='email']");
     By passwordInputField = By.xpath("//input[@id='password']");
@@ -33,20 +30,20 @@ public class SignInPage extends BaseMain {
     }
 
     public void fillTheSignFormWithIncorrectEmail() {
-        typeInformation(emailInputField, "Email Input Field", userData.incorrectEmail);
-        typeInformation(passwordInputField, "Password Input Field", userData.correctPassword);
+        typeInformation(emailInputField, "Email Input Field", incorrectEmail);
+        typeInformation(passwordInputField, "Password Input Field", correctPassword);
         clickElement(loginButton, "Login Btn");
     }
 
     public void fillTheSignFormWithCorrectData() {
-        typeInformation(emailInputField, "Email Input Field", userData.correctEmail);
-        typeInformation(passwordInputField, "Password Input Field", userData.correctPassword);
+        typeInformation(emailInputField, "Email Input Field", correctEmail);
+        typeInformation(passwordInputField, "Password Input Field", correctPassword);
         clickElement(loginButton, "Login Btn");
     }
 
     public void fillTheSignFormWithEmptyPassword() {
-        typeInformation(emailInputField, "Email Input Field", userData.correctEmail);
-        typeInformation(passwordInputField, "Password Input Field", userData.emptyPassword);
+        typeInformation(emailInputField, "Email Input Field", correctEmail);
+        typeInformation(passwordInputField, "Password Input Field", emptyPassword);
         clickElement(loginButton, "Login Btn");
     }
 
@@ -105,5 +102,8 @@ public class SignInPage extends BaseMain {
         softAssertActualAndExpectedList(getURLsFromLinkElements(), expectedActiveLinksOnSignInPage);
     }
 
+    public void urlCodesSignInPageVerification(){
+        softAssertActualAndExpectedListInt(verifyLinkActive(), expectedCodesOfActiveLinksOnSignInPage);
+    }
 
 }

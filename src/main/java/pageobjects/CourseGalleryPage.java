@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static utils.ExpectedData.*;
+
 @Getter
 public class CourseGalleryPage extends BaseMain {
 
@@ -73,7 +75,7 @@ public class CourseGalleryPage extends BaseMain {
 
     public void checkExpertiseListIsCorrect() {
         validateWithAssertEqual(
-                expectedExpertiseList(),
+                expectedExpertiseList,
                 getExpertiseList());
     }
 
@@ -82,10 +84,12 @@ public class CourseGalleryPage extends BaseMain {
     }
 
 
-    //ExpectedData
-    public List<String> expectedExpertiseList() {
-        List<String> expectedList = Arrays.asList("Development", "Testing", "Business Analyst", "Agile", "Project Management");
-        return expectedList;
-
+    public void urlCourseGalleryVerification(){
+        softAssertActualAndExpectedList(getURLsFromLinkElements(), expectedActiveLinksOnCourseGalleryPage);
     }
+
+    public void urlCodesCourseGalleryPageVerification(){
+        softAssertActualAndExpectedListInt(verifyLinkActive(), expectedCodesOfActiveLinksOnCourseGalleryPage);
+    }
+
 }
