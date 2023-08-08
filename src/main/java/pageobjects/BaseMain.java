@@ -192,14 +192,14 @@ public class BaseMain {
         List<Integer> codes = new ArrayList<>(); //this List will have codes that each URL will return
         List<String> collectedURLs = getURLsFromLinkElements(); //this List will have actual URLs
         for(String collectedURL: collectedURLs) { // this loop will execute actions below to fill up codes List with actual values
-            //System.out.println("Starting verification of " + collectedURL);
+            System.out.println("Starting verification of " + collectedURL);
             try { //making sure that exception won't fail the execution to carry execution on
                 URL url = new URL(collectedURL); //initializes URL instance for provided URL
                 HttpURLConnection httpURLConnect = (HttpURLConnection) url.openConnection(); //initialize HTTP Connection
                 httpURLConnect.setConnectTimeout(3000); //set timeout value
                 httpURLConnect.connect(); //establish connection to provided URL to execute a call
                 int resultCode = httpURLConnect.getResponseCode(); //providing actual value into a value of a variable to be returned
-                //System.out.println(resultCode);
+                System.out.println(resultCode);
                 codes.add(resultCode); //writing the result in resultCode array to return it
             } catch (Exception e) {
                 e.printStackTrace();

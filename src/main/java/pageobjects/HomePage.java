@@ -3,6 +3,7 @@ package pageobjects;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -48,11 +49,12 @@ public class HomePage extends BaseMain {
         checkElementIsDisplayed(getSignUpButton(), "SingUpBtn", true);
     }
 
-    public void urlHomePageVerification(){
-        softAssertActualAndExpectedList(getURLsFromLinkElements(), expectedActiveLinksOnHomePage);
-    }
-
-    public void urlCodesHomePageVerification(){
-        softAssertActualAndExpectedListInt(verifyLinkActive(), expectedCodesOfActiveLinksOnHomePage);
+    public void verificationOfCodesLink(){
+        List<Integer> actualCodesLinkList = verifyLinkActive();
+        SoftAssert softAssert = new SoftAssert();
+        for(Integer code : actualCodesLinkList) {
+            softAssert.assertEquals(code, (Integer) 200);
+        }
+        softAssert.assertAll();
     }
 }

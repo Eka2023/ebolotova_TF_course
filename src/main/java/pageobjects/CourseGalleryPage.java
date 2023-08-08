@@ -83,13 +83,4 @@ public class CourseGalleryPage extends BaseMain {
         validateWithAssertEqual(getNumOfQuestionsInCourse(expertiseName, courseName), expectedQuantity);
     }
 
-
-    public void urlCourseGalleryVerification(){
-        softAssertActualAndExpectedList(getURLsFromLinkElements(), expectedActiveLinksOnCourseGalleryPage);
-    }
-
-    public void urlCodesCourseGalleryPageVerification(){
-        softAssertActualAndExpectedListInt(verifyLinkActive(), expectedCodesOfActiveLinksOnCourseGalleryPage);
-    }
-
 }

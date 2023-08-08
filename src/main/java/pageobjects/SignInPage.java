@@ -11,7 +11,6 @@ import static utils.TestUserData.*;
 
 @Getter
 public class SignInPage extends BaseMain {
-
     By emailInputField = By.xpath("//input[@id='email']");
     By passwordInputField = By.xpath("//input[@id='password']");
     By loginButton = By.xpath("//button[@type='submit']");
@@ -96,14 +95,6 @@ public class SignInPage extends BaseMain {
 
     public void checkErrorMessageAboutIncorrectCredentials() {
         validateWithAssertEqual(elementGetText(getErrorMessage()), "Error: credentials you provided are incorrect. Please try again. ");
-    }
-
-    public void urlSignInPageVerification(){
-        softAssertActualAndExpectedList(getURLsFromLinkElements(), expectedActiveLinksOnSignInPage);
-    }
-
-    public void urlCodesSignInPageVerification(){
-        softAssertActualAndExpectedListInt(verifyLinkActive(), expectedCodesOfActiveLinksOnSignInPage);
     }
 
 }

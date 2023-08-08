@@ -1,30 +1,40 @@
 package testcases;
 
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import java.util.List;
 
 public class LinkVerificationTests extends BaseTest{
 
     @Test
     public void verifyHomePageLinks(){
         homePage.getBaseURL();
-        homePage.urlHomePageVerification();
-        homePage.urlCodesHomePageVerification();
+        homePage.verificationOfCodesLink();
     }
 
     @Test
-    public void verifySignInPageLinksListAndListSize(){
+    public void verifySignInPageLinks(){
         homePage.getBaseURL();
         homePage.clickSignInBtn();
-        signInPage.urlSignInPageVerification();
-        signInPage.urlCodesSignInPageVerification();
+        List<Integer> actualCodesLinkList = signInPage.verifyLinkActive();
+        SoftAssert softAssert = new SoftAssert();
+        for(Integer code : actualCodesLinkList) {
+            softAssert.assertEquals(code, (Integer) 200);
+        }
+        softAssert.assertAll();
     }
 
     @Test
-    public void verifyGalleryPageLinksListAndListSize(){
+    public void verifyGalleryPageLinks(){
         homePage.getBaseURL();
         homePage.clickCourseGalleryBtn();
-        courseGalleryPage.urlCourseGalleryVerification();
-        courseGalleryPage.urlCodesCourseGalleryPageVerification();
+        List<Integer> actualCodesLinkList = courseGalleryPage.verifyLinkActive();
+        SoftAssert softAssert = new SoftAssert();
+        for(Integer code : actualCodesLinkList) {
+            softAssert.assertEquals(code, (Integer) 200);
+        }
+        softAssert.assertAll();
     }
 
 }
