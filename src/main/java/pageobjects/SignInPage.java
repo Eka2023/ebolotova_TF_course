@@ -3,10 +3,11 @@ package pageobjects;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.asserts.SoftAssert;
 
+import java.util.List;
 import java.util.logging.Logger;
 
-import static utils.ExpectedData.*;
 import static utils.TestUserData.*;
 
 @Getter
@@ -95,6 +96,15 @@ public class SignInPage extends BaseMain {
 
     public void checkErrorMessageAboutIncorrectCredentials() {
         validateWithAssertEqual(elementGetText(getErrorMessage()), "Error: credentials you provided are incorrect. Please try again. ");
+    }
+
+    public void verificationOfCodesLinkOnSignInPage(){
+        List<Integer> actualCodesLinkList = verifyLinkActive();
+        SoftAssert softAssert = new SoftAssert();
+        for(Integer code : actualCodesLinkList) {
+            softAssert.assertEquals(code, (Integer) 200);
+        }
+        softAssert.assertAll();
     }
 
 }

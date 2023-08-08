@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -81,6 +81,15 @@ public class CourseGalleryPage extends BaseMain {
 
     public void checkNumberOfQuestionsForACourse(String expertiseName, String courseName, double expectedQuantity) {
         validateWithAssertEqual(getNumOfQuestionsInCourse(expertiseName, courseName), expectedQuantity);
+    }
+
+    public void verificationOfCodesLinkOnCourseGalleryPage(){
+        List<Integer> actualCodesLinkList = verifyLinkActive();
+        SoftAssert softAssert = new SoftAssert();
+        for(Integer code : actualCodesLinkList) {
+            softAssert.assertEquals(code, (Integer) 200);
+        }
+        softAssert.assertAll();
     }
 
 }

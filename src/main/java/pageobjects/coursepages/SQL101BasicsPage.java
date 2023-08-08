@@ -1,6 +1,5 @@
 package pageobjects.coursepages;
 
-import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 
 import java.util.logging.Logger;

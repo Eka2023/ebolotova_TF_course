@@ -1,6 +1,5 @@
 package testcases;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,7 +23,6 @@ import java.util.logging.SimpleFormatter;
 
 public class BaseTest extends ExpectedData {
     public WebDriver driver;
-    //Logger log;
     Logger log = Logger.getLogger(getClass().getName());
     BaseMain baseMain;
     HomePage homePage;

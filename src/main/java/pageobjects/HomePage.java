@@ -8,9 +8,6 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static utils.ExpectedData.expectedActiveLinksOnHomePage;
-import static utils.ExpectedData.expectedCodesOfActiveLinksOnHomePage;
-
 @Getter
 public class HomePage extends BaseMain {
     public HomePage(WebDriver dr, Logger log) {
@@ -49,7 +46,7 @@ public class HomePage extends BaseMain {
         checkElementIsDisplayed(getSignUpButton(), "SingUpBtn", true);
     }
 
-    public void verificationOfCodesLink(){
+    public void verificationOfCodesLinkOnHomePage(){
         List<Integer> actualCodesLinkList = verifyLinkActive();
         SoftAssert softAssert = new SoftAssert();
         for(Integer code : actualCodesLinkList) {

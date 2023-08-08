@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InterviewExample {
-
         public WebDriver driver;
         By article = By.xpath("//body/article");
         By articleParagraph = By.xpath("//body/article/p");
