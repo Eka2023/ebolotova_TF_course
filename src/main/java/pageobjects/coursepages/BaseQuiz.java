@@ -51,7 +51,7 @@ public class BaseQuiz extends BaseMain {
 
     public WebElement getAnswerForTheFirstQuestion(int answerId) {
         return driver.findElement(
-                By.xpath("//div[@class='quiz-process-question-block-answers-block-item ' and @data-answer-id='" + answerId + "']"));
+                    By.xpath("//div[@class='quiz-process-question-block-answers-block-item ' and @data-answer-id='" + answerId + "']"));
     }
 
     public WebElement getAnswerForTheAnotherQuestions(int answerId) {
