@@ -209,6 +209,8 @@ public class BaseMain {
         return codes; //a return of a list with codes for further verification
     }
 
+    public void validateElementIsContainsDisabledClass(By element, String elementName) {
+        Assert.assertTrue(driver.findElement(element).getAttribute("class").contains("disabled"));
+        System.out.println("Element "+elementName+" is disabled");
+    }
 }
-
-
