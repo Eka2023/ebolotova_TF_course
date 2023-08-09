@@ -121,7 +121,7 @@ public class BaseTest extends ExpectedData {
 
     }
     private void saveLogs(Logger log) throws IOException {
-        FileHandler fileHandler = new FileHandler("/Users/serhii/Documents/SDET_COURSE/ebolotova_TF_course/Logs.log");
+        FileHandler fileHandler = new FileHandler("/Users/ekaterinabolotova/IdeaProjects/ebolotova_TF_course/Logs.log");
         log.addHandler(fileHandler);
         SimpleFormatter formatter = new SimpleFormatter();
         fileHandler.setFormatter(formatter);

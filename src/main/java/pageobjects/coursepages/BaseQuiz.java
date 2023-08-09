@@ -17,7 +17,8 @@ public class BaseQuiz extends BaseMain {
 
     By qstAmount = By.xpath("//div[@class='quiz-process-questions-button ']");
     By answeredQstAmount = By.xpath("//div[@class='quiz-process-questions-button answered']");
-    By nextBtn = By.xpath("//div[text()='Next']");
+    By nextBtn = By.xpath("//div[@class='quiz-process-navigations-block-button-next ']");
+    By buttonNext = By.xpath("//div[text()='Next']");
     By questionName = By.xpath("//div[@class='quiz-process-question-block-task']");
     By processProgressData = By.id("quiz-process-progress-data");
 
@@ -50,7 +51,7 @@ public class BaseQuiz extends BaseMain {
 
     public WebElement getAnswerForTheFirstQuestion(int answerId) {
         return driver.findElement(
-                        By.xpath("//div[contains(@class, 'quiz-process-question-block-answers-block-item') and @data-answer-id='" + answerId + "']"));
+                By.xpath("//div[@class='quiz-process-question-block-answers-block-item ' and @data-answer-id='" + answerId + "']"));
     }
 
     public WebElement getAnswerForTheAnotherQuestions(int answerId) {
@@ -108,15 +109,28 @@ public class BaseQuiz extends BaseMain {
         clickElement(nextBtn, "NextBtn");
     }
 
+    public void clickFirstQuestionAnswer() {
+        clickElement(getAnswerFirstQuestion(0), "AnswerForTheFirstQuestion");
+    }
+
+    public WebElement getAnswerFirstQuestion(int answerId) {
+        return driver.findElement(
+                By.xpath("//div[contains(@class, 'quiz-process-question-block-answers-block-item') and @data-answer-id='" + answerId + "']"));
+    }
+
     public void completeQuiz() {
         totalNumberOfQuestions = CourseGalleryPage.numberOfQuestions;
         for (int i = 1; i <= totalNumberOfQuestions; i++) {
-            clickToTheFirstQuestionAnswer();
-            clickNextBtn();
+            clickFirstQuestionAnswer();
+            clickNextButton();
         }
     }
 
     public void verifyIsNextButtonDisabled() {
-        validateElementIsContainsDisabledClass(nextBtn, "Next button");
+        validateElementIsContainsDisabledClass(buttonNext, "Next button");
+    }
+
+    public void clickNextButton() {
+        clickElement(buttonNext, "Next button");
     }
 }
