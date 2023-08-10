@@ -20,6 +20,8 @@ public class CourseGalleryPage extends BaseMain {
     By historyBtn = By.xpath("//a[contains(text(), 'History')]");
     By expertiseList = By.xpath("//div[@class='expertise-areas-list']/div");
 
+    public static Integer numberOfQuestions;
+
     public CourseGalleryPage(WebDriver dr, Logger log) {
         super(dr, log);
     }
@@ -39,6 +41,7 @@ public class CourseGalleryPage extends BaseMain {
         By numOfQuestions = By.xpath("//span[contains(text(),'" + courseName + "')]/ancestor::div[@data-expertise-name= '" + expertiseName + "']//div[@class='quiz-item-questions-count']");
         String qstN = driver.findElement(numOfQuestions).getText();
         String amountOfQuestions = qstN.replaceAll("\\d+ \\/ ", "");
+        numberOfQuestions = Integer.valueOf(amountOfQuestions);
         return Integer.valueOf(amountOfQuestions);
     }
 
