@@ -44,7 +44,7 @@ public class BaseTest extends ExpectedData {
 
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--headless");      
-        options.addArguments("start-maximized"); // open Browser in maximized mode
+        //options.addArguments("start-maximized"); // open Browser in maximized mode
         options.addArguments("disable-infobars"); // disabling infobars
         options.addArguments("--disable-extensions"); // disabling extensions
         //options.addArguments("--disable-gpu"); // applicable to windows os only
