@@ -41,13 +41,17 @@ public class BaseTest extends ExpectedData {
         //System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
         System.setProperty("webdriver.chrome.driver", "/home/vboxuser/Documents/chromedriver");
         ChromeOptions options = new ChromeOptions();
+
         options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--headless");
-        options.add_argument("start-maximized");
-        options.add_argument("disable-infobars");
-        options.add_argument("--disable-extensions");
-        options.add_argument("--disable-dev-shm-usage");
-        options.add_argument("--no-sandbox");
+        options.addArguments("--headless");      
+        //options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.addArguments("--no-sandbox"); // Bypass OS security model
+
+        
         //WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
