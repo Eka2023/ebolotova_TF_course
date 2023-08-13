@@ -3,6 +3,7 @@
 <suite name="POM Whole TestSuite" verbose="1">
 
     <test name="Whole Test Suite">
+        <parameter name="browser" value="chrome"></parameter>
         <packages>
             <package name="testcases"></package>
         </packages>

@@ -1,8 +1,14 @@
 package testcases;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,13 +22,15 @@ import utils.ExpectedData;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class BaseTest extends ExpectedData {
-    public WebDriver driver;
+    public RemoteWebDriver driver;
     Logger log = Logger.getLogger(getClass().getName());
     BaseMain baseMain;
     HomePage homePage;
@@ -37,13 +45,11 @@ public class BaseTest extends ExpectedData {
         saveLogs(log);
     }
     @BeforeMethod(groups = {"high"})
-    public void openDriver() throws IOException {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        //options.addArguments("--headless");
+    @Parameters("browser")
+    public void openDriver() throws MalformedURLException {
+        driverConfig("sauce-chrome");
+
         //WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 //        log = Logger.getLogger(getClass().getName());
@@ -128,4 +134,51 @@ public class BaseTest extends ExpectedData {
         log.info("This is the beginning of Test Suit");
     }
 
+    public void driverConfig(String browserName) throws MalformedURLException {
+        if (browserName.equalsIgnoreCase("chrome")) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--remote-allow-origins=*");
+            //options.addArguments("--headless");
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
+            driver = new ChromeDriver(options);
+        } else if (browserName.equalsIgnoreCase("firefox")) {
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--remote-allow-origins=*");
+            System.setProperty("webdriver.gecko.driver", "src/test/resources/webdrivers/geckodriver");
+            driver = new FirefoxDriver(options);
+        } else if (browserName.equalsIgnoreCase("safari")) {
+            System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
+            driver = new SafariDriver();
+        } else if (browserName.equalsIgnoreCase("sauce-chrome")) {
+            ChromeOptions browserOptions = new ChromeOptions();
+            browserOptions.setPlatformName("Windows 11");
+            browserOptions.setBrowserVersion("latest");
+
+            Map<String, Object> sauceOptions = new HashMap<>();
+            sauceOptions.put("username", "oauth-bolotova.katya-76d03");
+            sauceOptions.put("accessKey", "808f828e-61a4-47e3-94fd-58cc90e80ea8");
+            sauceOptions.put("build", "selenium-build-GRSIM");
+            sauceOptions.put("name", "Whole Test Suite on SauceLab");
+            browserOptions.setCapability("sauce:options", sauceOptions);
+            URL url = new URL("https://ondemand.us-west-1.saucelabs.com:443/wd/hub");
+            driver = new RemoteWebDriver(url, browserOptions);
+        } else if (browserName.equalsIgnoreCase("sauce-firefox")) {
+            FirefoxOptions browserOptions = new FirefoxOptions();
+            browserOptions.setPlatformName("Windows 11");
+            browserOptions.setBrowserVersion("latest");
+
+            Map<String, Object> sauceOptions = new HashMap<>();
+            sauceOptions.put("username", "oauth-bolotova.katya-76d03");
+            sauceOptions.put("accessKey", "808f828e-61a4-47e3-94fd-58cc90e80ea8");
+            sauceOptions.put("build", "selenium-build-GRSIM");
+            sauceOptions.put("name", "Whole Test Suite on SauceLab");
+            browserOptions.setCapability("sauce:options", sauceOptions);
+            URL url = new URL("https://ondemand.us-west-1.saucelabs.com:443/wd/hub");
+            driver = new RemoteWebDriver(url, browserOptions);
+        } else {
+            System.out.println("Correct browser name is not found. Please check @Optional in @BeforeMethod.");
+        }
+    }
 }
+
+
