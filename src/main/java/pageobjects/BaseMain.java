@@ -94,6 +94,15 @@ public class BaseMain {
         }
     }
 
+    public void validateWithAssertEqual(String actual, String expected, String message) {
+        try {
+            Assert.assertEquals(actual, expected);
+            logger.info("Actual String value is " + actual + " and it's equal to " + expected);
+        } catch (Exception e) {
+            System.out.println(message);
+        }
+    }
+
     public void validateWithAssertEqual(double actual, double expected, String... message) {
         try {
             Assert.assertEquals(actual, expected);

@@ -24,9 +24,9 @@ public class LoginTestWithCSVDataProvider extends BaseTest{
     }
 
     @Test(dataProvider = "LoginPasswordDP")
-    public void loginTest(String login, String password, String isElementDisplayed, String errorMessage, String title) {
+    public void loginTest(String login, String password, String isElementDisplayed, String errorMessage,String title) {
         homePage.clickSignInBtn();
-        Assert.assertEquals(signInPage.getPageTitle().trim(), title.trim());
+        Assert.assertEquals(signInPage.getPageTitle(), title);
         signInPage.fillInLoginFormForDataProviderAsMethod(login, password);
         Assert.assertEquals(signInPage.elementIsDisplayedForCSVDataProviderTest(),
                 signInPage.convertBooleanToString(isElementDisplayed));

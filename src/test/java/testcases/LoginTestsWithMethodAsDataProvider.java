@@ -17,12 +17,12 @@ public class LoginTestsWithMethodAsDataProvider extends BaseTest{
     }
 
     @Test(dataProvider = "LoginPasswordDataProvider")
-    public void loginTest(String login, String password, String... message) {
+    public void loginTest(String login, String password, String message) {
         homePage.clickSignInBtn();
         signInPage.fillInLoginFormForDataProviderAsMethod(login, password);
         waitForVisibilityOf(signInPage.getErrorMessage(), 5); // how to re-write it?
         signInPage.checkThatErrorMessageIsDisplayed();
-        signInPage.getErrorMessageText();
-
+        String errorMsg = signInPage.getErrorMessageText();
+        signInPage.validateWithAssertEqual(errorMsg, message);
     }
 }
