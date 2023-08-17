@@ -3,7 +3,7 @@ package testcases;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class LoginTestsWithDataProvider extends BaseTest{
+public class LoginTestsWithMethodAsDataProvider extends BaseTest{
 
     @DataProvider(name = "LoginPasswordDataProvider")
     public Object[][] dpMethod() {
@@ -19,7 +19,7 @@ public class LoginTestsWithDataProvider extends BaseTest{
     @Test(dataProvider = "LoginPasswordDataProvider")
     public void loginTest(String login, String password, String... message) {
         homePage.clickSignInBtn();
-        signInPage.fillInLoginForm(login, password);
+        signInPage.fillInLoginFormForDataProviderAsMethod(login, password);
         waitForVisibilityOf(signInPage.getErrorMessage(), 5); // how to re-write it?
         signInPage.checkThatErrorMessageIsDisplayed();
         signInPage.getErrorMessageText();

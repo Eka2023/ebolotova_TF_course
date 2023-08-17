@@ -23,7 +23,7 @@ public class SignInPage extends BaseMain {
         super(dr, log);
     }
 
-    public void fillInLoginForm(String name, String password, String... message) {
+    public void fillInLoginFormForDataProviderAsMethod(String name, String password, String... message) {
         typeInformation(emailInputField, "Email Input Field", name);
         typeInformation(passwordInputField, "Password Input Field", password);
         clickElement(loginButton, "Login Btn");
@@ -90,8 +90,8 @@ public class SignInPage extends BaseMain {
         validateWithAssertEqual(elementGetText(getErrorMessage()), "Error: fields are empty");
     }
 
-    public void getErrorMessageText() {
-        elementGetText(getErrorMessage());
+    public String getErrorMessageText() {
+        return elementGetText(getErrorMessage());
     }
 
     public void checkErrorMessageAboutIncorrectCredentials() {
@@ -106,5 +106,14 @@ public class SignInPage extends BaseMain {
         }
         softAssert.assertAll();
     }
+
+    public boolean convertBooleanToString(String value){
+        return Boolean.valueOf(value);
+    }
+
+    public boolean elementIsDisplayedForCSVDataProviderTest(){
+        return driver.findElement(loginButton).isDisplayed();
+    }
+
 
 }

@@ -11,7 +11,7 @@ public class SelfPracticeTests extends BaseTest {
         //courseGalleryPage.checkThatHistoryButtonIsNotPresentedViaList(); //the second variant how to do it
         courseGalleryPage.navigationViaBrowserBack();
         homePage.clickSignInBtn();
-        signInPage.fillInLoginForm("testing@my-fork.com", "Password");
+        signInPage.fillInLoginFormForDataProviderAsMethod("testing@my-fork.com", "Password");
         homePage.clickCourseGalleryBtn();
         courseGalleryPage.checkThatCoursePageIsLoaded();
         courseGalleryPage.checkThatHistoryButtonIsPresented();

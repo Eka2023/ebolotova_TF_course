@@ -1,0 +1,5 @@
+﻿bolotova.katya@gmail.com,123,TRUE,Error: email is incorrect,Sign in
+bolotova.katya@gmail.com,wrongPassword,TRUE,Error: email is incorrect,Sign in
+ebolotov,correctPassword,TRUE,Error: email is incorrect,Sign in
+bolotova.katya@gmail.com,,TRUE,Error: fields are empty,Sign in
+,correctPassword,TRUE,Error: fields are empty,Sign in
