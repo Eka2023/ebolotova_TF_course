@@ -40,6 +40,8 @@ public class BaseTest extends ExpectedData {
     SQL101BasicsPage sql101BasicsPage;
     SQL101TestPage sql101TestPage;
 
+    PlayersPage playersPage;
+
     @BeforeTest
     public void createLog() throws IOException {
         saveLogs(log);
@@ -47,7 +49,13 @@ public class BaseTest extends ExpectedData {
     @BeforeMethod(groups = {"high"})
     @Parameters("browser")
     public void openDriver() throws MalformedURLException {
-        driverConfig("sauce-chrome");
+        //driverConfig("chrome");
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        //options.addArguments("--headless");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
+        driver = new ChromeDriver(options);
 
         //WebDriverManager.chromedriver().setup();
         driver.manage().window().maximize();
@@ -62,6 +70,8 @@ public class BaseTest extends ExpectedData {
         courseGalleryPage = new CourseGalleryPage(driver, log);
         sql101BasicsPage = new SQL101BasicsPage(driver, log);
         sql101TestPage = new SQL101TestPage(driver, log);
+        playersPage = new PlayersPage(driver, log);
+
 
         /**
          *         This example slows down tests in two times:
