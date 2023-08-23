@@ -3,6 +3,7 @@ package testcases;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Map;
 
 public class NestedLoopsTest extends BaseTest {
 
@@ -64,14 +65,21 @@ public class NestedLoopsTest extends BaseTest {
 
 
     @Test
-    public void playersTest() throws InterruptedException {
+    public void playersTest() {
         playersPage.openPage();
         playersPage.clickAgree();
-        Thread.sleep(1000);
-        String a = playersPage.columnOneValue(1);
+        String a = playersPage.columnOneValue(8);
         System.out.println(a);
-        List<String> b = playersPage.columnTwoValue(1);
+        List<String> b = playersPage.columnTwoValue(6);
         System.out.println(b);
-
     }
+
+    @Test
+    public void playersTest_duplicate() {
+        playersPage.openPage();
+        playersPage.clickAgree();
+        Map<String, List<String>> a = playersPage.playersInfo();
+        System.out.println(a);
+    }
+
 }
