@@ -17,11 +17,11 @@ public class GenericAlgorithms {
      * swap() - swaps the position of two elements in a collection
      * addAll() - adds all the elements of a collection to other collection
      * binarySearch() - searches for the specified element
-     *
+     * <p>
      * Composition:
      * frequency() - returns the count of the number of times an element is present in the collection
      * disjoint() - checks if two collections contain some common element
-     *
+     * <p>
      * Extreme Value:
      * min() - are used to find the minimum elements,
      * max() - are used to find the maximum elements,
@@ -77,7 +77,7 @@ public class GenericAlgorithms {
     }
 
     @Test
-    public void compositionAlgorithms(){
+    public void compositionAlgorithms() {
         ArrayList<Integer> numbers = new ArrayList<>();
         numbers.add(1);
         numbers.add(2);
@@ -100,7 +100,7 @@ public class GenericAlgorithms {
     }
 
     @Test
-    public void extremeValues(){
+    public void extremeValues() {
         ArrayList<Integer> numbers = new ArrayList<>();
         numbers.add(1);
         numbers.add(2);
